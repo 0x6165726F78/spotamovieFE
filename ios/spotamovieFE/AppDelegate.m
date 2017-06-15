@@ -11,18 +11,18 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-/*#import <React/RCTLinkingManager.h>    TODO: FIX THIS DEPENDENCY */
+#import <React/RCTLinkingManager.h>
 /* #import <RCTLinkingManager.h> */
 
 @implementation AppDelegate
-/*
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   return [RCTLinkingManager application:application openURL:url
                       sourceApplication:sourceApplication annotation:annotation];
 }
-*/
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
