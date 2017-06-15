@@ -17,15 +17,17 @@ import {
   StyleSheet,
   View, Text
 } from 'react-native';
-
+import createLogger from 'redux-logger'
 
 
 const composeEnhancers = composeWithDevTools({ realtime: true });
 const store = createStore(reducers, composeEnhancers(
   applyMiddleware(
     // api(SpotifySymbol,  'https://private-bd796b-spotamovie.apiary-mock.com'),
-    api(SpotifySymbol, 'https://spotamovie.herokuapp.com'),
-    api(TMDBSymbol, 'https://api.themoviedb.org/3', '?api_key=' + config.api_key)
+    // api(SpotifySymbol, 'https://spotamovie.herokuapp.com'),
+    api(SpotifySymbol, 'http://localhost:3000'),
+    api(TMDBSymbol, 'https://api.themoviedb.org/3', '?api_key=' + config.api_key),
+    createLogger()
   )
 ));
 
