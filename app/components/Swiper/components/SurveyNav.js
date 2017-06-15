@@ -14,16 +14,16 @@ import {
   Button
 } from 'react-native';
 
-const {
-  PropTypes: NavigationPropTypes,
-  StateUtils: NavigationStateUtils,
-  Card: NavigationCard,
-  Transitioner: NavigationTransitioner,
-} = NavigationExperimental;
+// const {
+//   PropTypes: NavigationPropTypes,
+//   StateUtils: NavigationStateUtils,
+//   Card: NavigationCard,
+//   Transitioner: NavigationTransitioner,
+// } = NavigationExperimental;
 
-const {
-  PagerStyleInterpolator: NavigationPagerStyleInterpolator,
-} = NavigationCard;
+// const {
+//   PagerStyleInterpolator: NavigationPagerStyleInterpolator,
+// } = NavigationCard;
 
 
 const styles = StyleSheet.create({
@@ -54,18 +54,18 @@ const styles = StyleSheet.create({
 });
 
 const buttonStyle = {
-  start:{
+  start: {
     padding: 10,
     margin: 10,
-    backgroundColor:'rgba(0,0,0,0)',
-    borderRadius:30,
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderRadius: 30,
     borderWidth: 1,
     borderColor: '#fff'
   },
-  startText:{
-      color:'white',
-      textAlign:'center',
-      fontSize: 16
+  startText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 16
   }
 }
 

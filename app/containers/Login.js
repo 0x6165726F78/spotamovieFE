@@ -5,11 +5,11 @@ import { bindActionCreators } from 'redux'
 import { login, logout, loading } from '../actions/actions'
 import config from '../../config';
 import querystring from 'querystring';
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
 import { Actions } from 'react-native-router-flux';
 import { styles } from './styles/stylesLogin'
 import { Spinner } from 'nachos-ui';
-import Wizard from  '../components/Wizard/Wizard';
+import Wizard from '../components/Wizard/Wizard';
 
 import {
   Animated,
@@ -24,18 +24,18 @@ import {
   Image
 } from 'react-native';
 
-const {
-  PropTypes: NavigationPropTypes,
-  StateUtils: NavigationStateUtils,
-  Card: NavigationCard,
-  Transitioner: NavigationTransitioner,
-} = NavigationExperimental;
+// const {
+//   PropTypes: NavigationPropTypes,
+//   StateUtils: NavigationStateUtils,
+//   Card: NavigationCard,
+//   Transitioner: NavigationTransitioner,
+// } = NavigationExperimental;
 
-const {
-  PagerStyleInterpolator: NavigationPagerStyleInterpolator,
-} = NavigationCard;
+// const {
+//   PagerStyleInterpolator: NavigationPagerStyleInterpolator,
+// } = NavigationCard;
 
-const generateRandomString = function(length) {
+const generateRandomString = function (length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -47,15 +47,15 @@ const generateRandomString = function(length) {
 
 const scope = 'user-read-private user-read-email playlist-read-private';
 const state = generateRandomString(16);
-const query= ('https://accounts.spotify.com/authorize?' +
-querystring.stringify({
-  response_type: 'code',
-  client_id: config.client_id,
-  scope: scope,
-  redirect_uri: config.redirect_uri,
-  state: state
-}))
-function spotifyOauth () {
+const query = ('https://accounts.spotify.com/authorize?' +
+  querystring.stringify({
+    response_type: 'code',
+    client_id: config.client_id,
+    scope: scope,
+    redirect_uri: config.redirect_uri,
+    state: state
+  }))
+function spotifyOauth() {
   Linking.openURL(query);
 }
 
@@ -93,7 +93,7 @@ class Login extends Component {
 
   handleLogout() {
     this.props.logout()
-    this.setState({userLogged: false})
+    this.setState({ userLogged: false })
   }
 
   renderLoginScreen() {
@@ -134,14 +134,14 @@ class Login extends Component {
             <Text style={styles.title}>
               LOGGING IN...
             </Text>
-            <Spinner color="#94de45"/>
+            <Spinner color="#94de45" />
           </View>
         </View>
       );
     }
     if (this.props.user.userToken) {
       return (
-        <Wizard/>
+        <Wizard />
       );
     } else {
       return (

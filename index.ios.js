@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 
 import reducers from './app/reducers/reducers';
 import api from './app/lib/api.js';
-// import AppContainer from './app/containers/AppContainer'
+import AppContainer from './app/containers/AppContainer'
 import Login from './app/containers/Login';
 import { SpotifySymbol, TMDBSymbol } from './app/actions/actions';
 import config from './config';
@@ -31,7 +31,7 @@ const store = createStore(reducers, composeEnhancers(
 
 const App = () => (
   <Provider store={store}>
-    <View><Text>aa</Text></View>
+    <AppContainer />
   </Provider>
 )
 

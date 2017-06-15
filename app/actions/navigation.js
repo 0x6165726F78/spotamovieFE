@@ -1,8 +1,8 @@
 import * as types from './types'
 import ReactNative from 'react-native'
-const { NavigationExperimental } =  ReactNative
-const { jumpToIndex } = NavigationExperimental.StateUtils;
-
+const { NavigationExperimental } = ReactNative
+// const { jumpToIndex } = NavigationExperimental.StateUtils;
+console.log(NavigationExperimental)
 export function setTab(tabIndex) {
   return (dispatch, getState) => {
     const { tabs } = getState()
