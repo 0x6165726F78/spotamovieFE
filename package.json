@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "@exponent/vector-icons": "^4.0.0",
@@ -17,7 +18,7 @@
     "react-native-circular-action-menu": "^0.4.0",
     "react-native-extended-stylesheet": "^0.3.1",
     "react-native-keychain": "^1.0.0",
-    "react-native-router-flux": "^3.37.0",
+    "react-native-router-flux": "3.40.1",
     "react-native-spotify": "^1.0.1",
     "react-native-swipe-cards": "^0.1.0",
     "react-native-vector-icons": "^4.0.0",
@@ -29,14 +30,14 @@
     "shitty-qs": "^1.0.1"
   },
   "devDependencies": {
-    "babel-jest": "^18.0.0",
-    "babel-preset-react-native": "1.9.1",
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.0.0",
     "eslint": "^3.14.1",
     "eslint-plugin-react": "^6.9.0",
     "flow-bin": "^0.38.0",
-    "jest": "^18.1.0",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12",
     "jest-fetch-mock": "^1.0.7",
-    "react-test-renderer": "15.4.2",
     "remote-redux-devtools": "^0.5.7"
   },
   "jest": {
