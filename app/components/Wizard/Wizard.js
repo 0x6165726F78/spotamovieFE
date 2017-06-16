@@ -7,12 +7,17 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  StatusBar
 } from 'react-native';
 
 const arrowIcon = (<Icon name="md-arrow-round-forward" size={30} color="white" height={20} />);
 
 class Wizard extends Component {
+  static navigationOptions = {
+    header: null,
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -25,7 +30,7 @@ class Wizard extends Component {
         <View style={styles.containerSkip}>
           <TouchableHighlight
             style={styles.skipButton}
-            onPress={Actions.Recomm}
+            onPress={() => this.props.navigation.navigate('Recomm')}
             underlayColor='#23222E'>
             <Text style={styles.skipText}>SKIP IT</Text>
           </TouchableHighlight>
@@ -33,16 +38,18 @@ class Wizard extends Component {
         <View style={styles.containerStart}>
           <TouchableHighlight
             style={styles.start}
-            onPress={Actions.SwiperEL}
+            onPress={() => this.props.navigation.navigate('SwiperEL')}
             underlayColor='#fff'>
-              <Text style={styles.startText}>START WIZARD</Text>
+            <Text style={styles.startText}>START WIZARD</Text>
           </TouchableHighlight>
           <TouchableHighlight
-            onPress={Actions.SwiperEL}
+            onPress={() => this.props.navigation.navigate('SwiperEL')}
             underlayColor='#fff'>
             <Text style={styles.arrowIcon}>{arrowIcon}</Text>
           </TouchableHighlight>
         </View>
+
+        <StatusBar barStyle="light-content" />
       </View>
     );
   }
