@@ -17,15 +17,25 @@ import { styles, buttonStyle } from './styles/stylesLiked';
 import ActionButton from 'react-native-circular-action-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
-
-
-
-
 class LikedList extends Component {
-  constructor (props){
+  static navigationOptions = {
+    title: 'MOVIES LIKED',
+    headerTitleStyle: {
+      fontSize: 20,
+    },
+
+    tabBarIcon: ({ tintColor, focused }) =>
+      <Icon
+        name={`ios-heart${focused ? '' : '-outline'}`}
+        color={tintColor}
+        size={32}
+      />,
+    tabBarLabel: 'Liked',
+  };
+
+  constructor(props) {
     super(props)
-    this.filteredMovies=[];
+    this.filteredMovies = [];
   }
   state = {
     cardIndex: 0,
@@ -45,17 +55,17 @@ class LikedList extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if(this.props.moviesLiked !== nextProps.moviesLiked) {
+    if (this.props.moviesLiked !== nextProps.moviesLiked) {
       nextProps.moviesLiked.map(movieId => {
         this.props.getMovieFromId(movieId)
       })
     }
-    if(this.props.moviesDisliked !== nextProps.moviesDisliked) {
+    if (this.props.moviesDisliked !== nextProps.moviesDisliked) {
       nextProps.moviesDisliked.map(movieId => {
         this.props.getMovieFromId(movieId)
       })
     }
-    if(this.props.movies !== nextProps.movies) {
+    if (this.props.movies !== nextProps.movies) {
       this.filteredMovies = this.props.movies.filter((val) => {
         if (this.state.value === 'Liked')
           return this.props.moviesLiked.includes(val.id.toString())
@@ -101,8 +111,8 @@ class LikedList extends Component {
   handleLogout() {
     console.log('logoutting');
     this.props.logout()
-    this.setState({userLogged: false})
-    Actions.Login()
+    this.setState({ userLogged: false })
+    this.props.navigation.navigate('Login')
   }
 
   _onValueChange = (value) => {
@@ -112,7 +122,7 @@ class LikedList extends Component {
   };
 
   render() {
-    let title='';
+    let title = '';
     const movies = this.props.movies;
 
     if (this.state.cardIndex > movies.length - 1) {
@@ -132,33 +142,12 @@ class LikedList extends Component {
     return (
       <View
         style={{
-          backgroundColor:'#23222E',
+          backgroundColor: '#23222E',
           flex: 1,
           flexDirection: 'column',
-          alignItems: 'stretch'
+          alignItems: 'stretch',
         }}>
-        <View style={{
-          flex: 0.1,
-          // backgroundColor: 'pink',
-          flexDirection: 'column',
-          alignItems:'center',
-          justifyContent: 'center',
-          marginTop: 20,
-        }}>
-          <Text style={{
-            fontFamily: 'Raleway-Bold',
-            fontSize: 30,
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            // backgroundColor: 'purple',
-            color: 'white',
-            marginBottom:0
-          }}>
-            Movies {this.state.value}
-          </Text>
-        </View>
-        <View style={{marginLeft: 12, marginRight: 12, marginBottom: 10}}>
+        <View style={{ marginLeft: 12, marginRight: 12, marginBottom: 12, marginTop: 12, }}>
           <SegmentedControlIOS
             tintColor="lightgrey"
             values={this.state.values}
@@ -168,11 +157,11 @@ class LikedList extends Component {
           />
         </View>
         <ScrollView
-          style={{flex:1}}>
+          style={{ flex: 1 }}>
           <View style={{
-           flexDirection: 'row',
-           flexWrap: 'wrap',
-           alignItems: 'flex-start'
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'flex-start'
           }}>
             {
               this.filteredMovies.map((movie) =>
@@ -186,32 +175,6 @@ class LikedList extends Component {
             }
           </View>
         </ScrollView>
-        <View
-          style={{
-            bottom: 60
-          }}>
-          <ActionButton
-            buttonColor="#94de45">
-            <ActionButton.Item
-              buttonColor='#94de45'
-              title="Survey"
-              onPress={() => Actions.SwiperEL()}>
-              <Icon name="md-heart" size={20} color="white" />
-            </ActionButton.Item>
-            <ActionButton.Item
-              buttonColor='#94de45'
-              title="Recomm"
-              onPress={() => {Actions.Recomm()}}>
-              <Icon name="md-aperture"color="white" size={20}  style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-            <ActionButton.Item
-              buttonColor='#94de45'
-              title="Logout"
-              onPress={() => {this.handleLogout()}}>
-              <Icon name="md-log-out" size={20} color="white" />
-            </ActionButton.Item>
-          </ActionButton>
-        </View>
 
       </View>
     );
