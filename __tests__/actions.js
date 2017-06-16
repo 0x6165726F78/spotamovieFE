@@ -1,4 +1,4 @@
-import * as ActionCreators from '../app/actions/actions'
+import * as ActionCreators from '../app/actions/actions';
 
 describe('Action creators for SpotifySymbol', () => {
   it('getMovieRecommendation', () => {
