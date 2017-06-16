@@ -12,22 +12,36 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const POSTER = 'https://image.tmdb.org/t/p/w500';
 
 class Recomm extends Component {
+  static navigationOptions = {
+    title: 'RECOMMENDATION',
+    headerTitleStyle: {
+      fontSize: 20,
+    },
+
+    tabBarIcon: ({ tintColor, focused }) =>
+      <Icon
+        name={`ios-happy${focused ? '' : '-outline'}`}
+        color={tintColor}
+        size={32}
+      />,
+    tabBarLabel: 'Last',
+  };
 
   constructor() {
-      super();
-      this.state = {modalVisible: false};
-    }
+    super();
+    this.state = { modalVisible: false };
+  }
 
   openModal = () => {
-    this.setState({modalVisible: true});
+    this.setState({ modalVisible: true });
   }
 
   closeModal = () => {
-    this.setState({modalVisible: false});
+    this.setState({ modalVisible: false });
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.movieRecomm !== nextProps.movieRecomm) {
+    if (this.props.movieRecomm !== nextProps.movieRecomm) {
       this.props.getMovieFromId(nextProps.movieRecomm);
     }
   }
@@ -42,8 +56,8 @@ class Recomm extends Component {
   handleLogout() {
     console.log('logoutting');
     this.props.logout()
-    this.setState({userLogged: false})
-    Actions.Login()
+    this.setState({ userLogged: false })
+    this.props.navigation.navigate('Login')
   }
 
   render() {
@@ -51,26 +65,21 @@ class Recomm extends Component {
 
     if (!movie) {
       return (
-        <RecLoader/>
+        <RecLoader />
       )
     }
 
     return (
       <View style={styles.container}>
 
-        <View style={styles.titleView}>
-          <Text style={styles.title}>
-            Recommendations
-          </Text>
-        </View>
-
         <View style={styles.posterView}>
           <TouchableHighlight
-            onPress = {this.openModal}>
+            onPress={this.openModal}
+          >
             <View style={styles.poster}>
               <Image
                 style={styles.posterCard}
-                source={{uri: `${POSTER}/${movie.poster_path}`}}
+                source={{ uri: `${POSTER}/${movie.poster_path}` }}
               />
             </View>
           </TouchableHighlight>
@@ -81,44 +90,17 @@ class Recomm extends Component {
           animationType="fade"
           transparent
           visible={this.state.modalVisible}
-          >
+        >
           <TouchableHighlight
             onPress={this.closeModal}
             style={styles.modal1}>
-            <View style = {styles.modal}>
-              <MovieCard/>
+            <View style={styles.modal}>
+              <MovieCard />
             </View>
           </TouchableHighlight>
         </Modal>
 
-        <View style={styles.buttonRow1}>
-          <ActionButton  buttonColor="#94de45">
 
-            <ActionButton.Item buttonColor='#94de45' title="Survey"
-              onPress={() => {Actions.SwiperEL()}}>
-              <Icon name="md-heart" size={20} color="white" />
-            </ActionButton.Item>
-
-            <ActionButton.Item buttonColor='#94de45'
-              title="Notifications" onPress={() => {this.newRecomm()}}>
-              <Icon name="md-repeat"color="white" size={20}  style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-
-            <ActionButton.Item buttonColor='#94de45' title="LikedList"
-              onPress={() => {Actions.LikedList()}}>
-              <Icon name="md-aperture"color="white" size={20}  style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-
-
-             <ActionButton.Item
-               buttonColor='#94de45'
-               title="Logout"
-               onPress={() => {this.handleLogout()}}>
-               <Icon name="md-log-out" size={20} color="white" />
-             </ActionButton.Item>
-
-          </ActionButton>
-        </View>
       </View>
     )
   }
