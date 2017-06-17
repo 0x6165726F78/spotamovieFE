@@ -9,11 +9,12 @@ import RecLoader from '../../components/RecLoader';
 import MovieCard from '../../components/MovieCard';
 import ActionButton from 'react-native-circular-action-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
+import I18n from 'react-native-i18n';
 const POSTER = 'https://image.tmdb.org/t/p/w500';
 
 class RecommendedScreen extends Component {
-  static navigationOptions = {
-    title: 'RECOMMENDATION',
+  static navigationOptions = () => ({
+    title: I18n.t('reco'),
     headerTitleStyle: {
       fontSize: 20,
     },
@@ -24,8 +25,8 @@ class RecommendedScreen extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Last',
-  };
+    tabBarLabel: I18n.t('Last'),
+  });
 
   constructor() {
     super();

@@ -15,10 +15,11 @@ import { Spinner } from 'nachos-ui';
 import { styles, buttonStyle } from './styles';
 import ActionButton from 'react-native-circular-action-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
+import I18n from 'react-native-i18n';
 
 class LikedListScreen extends Component {
-  static navigationOptions = {
-    title: 'MOVIES LIKED',
+  static navigationOptions = () => ({
+    title: I18n.t('likedMovies'),
     headerTitleStyle: {
       fontSize: 20,
     },
@@ -29,8 +30,8 @@ class LikedListScreen extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Liked',
-  };
+    tabBarLabel: I18n.t('Liked'),
+  });
 
   constructor(props) {
     super(props)
@@ -39,7 +40,7 @@ class LikedListScreen extends Component {
   state = {
     cardIndex: 0,
     value: 'Liked',
-    values: ['Liked', 'Disliked'],
+    values: [I18n.t('Liked'), I18n.t('Disliked')],
     selectedIndex: 0
   }
   componentDidMount() {

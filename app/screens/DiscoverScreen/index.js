@@ -9,7 +9,8 @@ import { likeMovie, dislikeMovie } from '../../actions';
 
 import { Spinner, Button } from 'nachos-ui';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { themeManager } from 'nachos-ui'
+import { themeManager } from 'nachos-ui';
+import I18n from 'react-native-i18n';
 
 const iconHeart = (<Icon name="md-heart" size={40} color="white" />)
 const iconClose = (<Icon name="md-close" size={40} color="white" />)
@@ -23,8 +24,8 @@ const transparentButtonStyle = {
 btnStyle = { margin: 5 }
 
 class SwiperEL extends Component {
-  static navigationOptions = {
-    title: 'DISCOVER',
+  static navigationOptions = () => ({
+    title: I18n.t('discover'),
     headerTitleStyle: {
       fontSize: 20,
     },
@@ -35,8 +36,8 @@ class SwiperEL extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Discover',
-  };
+    tabBarLabel: I18n.t('Discover'),
+  });
 
   state = {
     cardIndex: 0
@@ -98,7 +99,7 @@ class SwiperEL extends Component {
         <View style={styles.containerLoader}>
           <View style={styles.titleView}>
             <Text style={styles.title}>
-              LOADING SURVEY...
+              {I18n.t('loadingSurvey')}
               </Text>
             <Spinner color="#94de45" />
           </View>
@@ -149,7 +150,7 @@ class SwiperEL extends Component {
               onPress={this.clickSkip}
             // iconName='md-close'
             >
-              I don't know
+              {I18n.t('idk')}
             </Button>
           </View>
 

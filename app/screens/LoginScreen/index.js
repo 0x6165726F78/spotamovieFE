@@ -9,6 +9,7 @@ import { Buffer } from 'buffer';
 import styles from './styles'
 import { Spinner } from 'nachos-ui';
 import Wizard from '../../components/Wizard';
+import I18n from 'react-native-i18n';
 
 import {
   Animated,
@@ -64,9 +65,9 @@ class LoginScreen extends Component {
 
   handleGreeting() {
     if (this.props.user.name !== undefined) {
-      return <Text style={styles.startText}>Welcome {this.props.user.name}</Text>
+      return <Text style={styles.startText}>{I18n.t('welcome')} {this.props.user.name}</Text>
     } else {
-      return <Text style={styles.startText}>Welcome</Text>
+      return <Text style={styles.startText}>{I18n.t('welcome')}</Text>
     }
   }
 
@@ -91,10 +92,10 @@ class LoginScreen extends Component {
           </Text>
         </View>
         <View style={styles.containerSubheading}>
-          <Text style={styles.subheading}>Get movie recommendations based on your music preferences</Text>
+          <Text style={styles.subheading}>{I18n.t('recommendations')}</Text>
         </View>
         <View style={styles.containerInstructions}>
-          <Text style={styles.instructions}>Sign in with Spotify so we can process your playlists</Text>
+          <Text style={styles.instructions}>{I18n.t('signIn')}</Text>
         </View>
         <View style={styles.startContainer}>
           <TouchableHighlight
@@ -103,7 +104,7 @@ class LoginScreen extends Component {
             underlayColor='red'>
             <View style={styles.loginButtonContainer}>
               <Image style={styles.spotifyIcon} source={require('./spotifyIconBlack.png')} />
-              <Text style={styles.startText}>SIGN IN WITH SPOTIFY</Text>
+              <Text style={styles.startText}>{I18n.t('signButton')}</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -126,7 +127,7 @@ class LoginScreen extends Component {
         <View style={styles.containerLoader}>
           <View style={styles.titleView}>
             <Text style={styles.title}>
-              LOGGING IN...
+              {I18n.t('logging')}
             </Text>
             <Spinner color="#94de45" />
           </View>
