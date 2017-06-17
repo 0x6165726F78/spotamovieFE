@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { getMoviesPopular } from '../../../actions/actions.js';
+import { getMoviesPopular } from '../../../actions';
 
 const NoMoreCard = ({ getMoviesPopular }) => (
   <View style={styles.root}>

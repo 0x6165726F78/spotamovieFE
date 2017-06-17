@@ -2,19 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, StatusBar, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import SwipeCards from 'react-native-swipe-cards';
-import { styles } from './styles/SwiperEl';
+import { styles } from './styles';
 import { ButtonsGroup, Card, NoMoreCard } from './components';
-import ActionCreators from '../../actions'
-import { likeMovie, dislikeMovie } from '../../actions/actions';
+import * as ActionCreators from '../../actions'
+import { likeMovie, dislikeMovie } from '../../actions';
 
-import LikedList from '../LikedList/LikedList';
-import { Actions } from 'react-native-router-flux';
-import Login from '../../containers/Login';
 import { Spinner, Button } from 'nachos-ui';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { themeManager } from 'nachos-ui'
-import Recomm from '../Recomm/Recomm';
-// import RecLoader from '../RecLoader/RecLoader';
 
 const iconHeart = (<Icon name="md-heart" size={40} color="white" />)
 const iconClose = (<Icon name="md-close" size={40} color="white" />)

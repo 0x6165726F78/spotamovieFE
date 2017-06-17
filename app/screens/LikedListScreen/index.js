@@ -9,15 +9,14 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
-import ActionCreators from '../../actions'
+import * as ActionCreators from '../../actions'
 import MovieItem from './components/MovieItem';
-import { Actions } from 'react-native-router-flux';
 import { Spinner } from 'nachos-ui';
-import { styles, buttonStyle } from './styles/stylesLiked';
+import { styles, buttonStyle } from './styles';
 import ActionButton from 'react-native-circular-action-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-class LikedList extends Component {
+class LikedListScreen extends Component {
   static navigationOptions = {
     title: 'MOVIES LIKED',
     headerTitleStyle: {
@@ -201,4 +200,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LikedList);
+export default connect(mapStateToProps, mapDispatchToProps)(LikedListScreen);

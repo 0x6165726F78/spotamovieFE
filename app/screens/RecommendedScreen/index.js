@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar, TouchableOpacity, Image, TouchableHighlight, Modal } from 'react-native';
 import { connect } from 'react-redux';
-import ActionCreators from '../../actions';
+import * as ActionCreators from '../../actions';
 import { Spinner } from 'nachos-ui';
-import { styles, buttonStyle } from './styles/Recomm';
+import { styles, buttonStyle } from './styles';
 import { Actions } from 'react-native-router-flux';
-import RecLoader from '../RecLoader/RecLoader';
-import MovieCard from '../MovieCard/MovieCard';
+import RecLoader from '../../components/RecLoader';
+import MovieCard from '../../components/MovieCard';
 import ActionButton from 'react-native-circular-action-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 const POSTER = 'https://image.tmdb.org/t/p/w500';
 
-class Recomm extends Component {
+class RecommendedScreen extends Component {
   static navigationOptions = {
     title: 'RECOMMENDATION',
     headerTitleStyle: {
@@ -120,4 +120,4 @@ const mapDispatchToProps = (dispatch) => ({
   getMovieRecommendation: () => dispatch(ActionCreators.getMovieRecommendation()),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Recomm);
+export default connect(mapStateToProps, mapDispatchToProps)(RecommendedScreen);

@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     flex: 0.1,
     // backgroundColor: 'pink',
     flexDirection: 'column',
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
   },
@@ -30,22 +30,22 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     // backgroundColor: 'purple',
     color: 'white',
-    marginBottom:10,
+    marginBottom: 10,
   }
 });
 
 export const buttonStyle = StyleSheet.create({
-  start:{
+  start: {
     padding: 5,
     marginTop: 40,
-    backgroundColor:'#23222E',
-    borderRadius:30,
+    backgroundColor: '#23222E',
+    borderRadius: 30,
     borderWidth: 1,
     borderColor: '#fff'
   },
-  startText:{
-      color:'#fff',
-      textAlign:'center',
-      fontSize: 16
+  startText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16
   }
 })

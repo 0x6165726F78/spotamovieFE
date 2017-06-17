@@ -2,14 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import base64 from 'base-64';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { login, logout, loading } from '../actions/actions'
-import config from '../../config';
+import { login, logout, loading } from '../../actions'
+import config from '../../../config';
 import querystring from 'querystring';
 import { Buffer } from 'buffer';
-import { Actions } from 'react-native-router-flux';
-import { styles } from './styles/stylesLogin'
+import styles from './styles'
 import { Spinner } from 'nachos-ui';
-import Wizard from '../components/Wizard/Wizard';
+import Wizard from '../../components/Wizard';
 
 import {
   Animated,
@@ -25,16 +24,7 @@ import {
   StatusBar
 } from 'react-native';
 
-// const {
-//   PropTypes: NavigationPropTypes,
-//   StateUtils: NavigationStateUtils,
-//   Card: NavigationCard,
-//   Transitioner: NavigationTransitioner,
-// } = NavigationExperimental;
 
-// const {
-//   PagerStyleInterpolator: NavigationPagerStyleInterpolator,
-// } = NavigationCard;
 
 const generateRandomString = function (length) {
   var text = '';
@@ -61,16 +51,10 @@ function spotifyOauth() {
 }
 
 
-class Login extends Component {
+class LoginScreen extends Component {
   static navigationOptions = {
     header: null,
   };
-
-  componentDidMount() {
-
-  }
-
-
 
   handleOpenSpotifyURL(event) {
     let code = event.url.match(/code=(.+)\&/);
@@ -118,7 +102,7 @@ class Login extends Component {
             onPress={this.handleLogin.bind(this)}
             underlayColor='red'>
             <View style={styles.loginButtonContainer}>
-              <Image style={styles.spotifyIcon} source={require('./images/spotifyIconBlack.png')} />
+              <Image style={styles.spotifyIcon} source={require('./spotifyIconBlack.png')} />
               <Text style={styles.startText}>SIGN IN WITH SPOTIFY</Text>
             </View>
           </TouchableHighlight>
@@ -177,4 +161,4 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(LoginScreen);

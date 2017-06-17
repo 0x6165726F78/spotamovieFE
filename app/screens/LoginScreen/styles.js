@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     backgroundColor: '#23222E',
     flex: 1,
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     flex: 0.1,
     // backgroundColor: 'pink',
     flexDirection: 'column',
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
   },
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     // backgroundColor: 'purple',
     color: 'white',
-    marginBottom:10,
+    marginBottom: 10,
   },
   scene: {
     flex: 1,
@@ -79,18 +79,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 0.1,
   },
-  start:{
+  start: {
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    backgroundColor:'#62C654',
-    borderRadius:30,
+    backgroundColor: '#62C654',
+    borderRadius: 30,
     borderWidth: 1,
     // width: 250
   },
-  startText:{
-    color:'white',
-    textAlign:'center',
+  startText: {
+    color: 'white',
+    textAlign: 'center',
     fontSize: 16
   },
   loginButtonContainer: {

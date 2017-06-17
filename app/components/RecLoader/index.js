@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Actions } from 'react-native-router-flux';
-import { styles } from './styles/RecLoader';
+import { styles } from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Spinner } from 'nachos-ui';
 
