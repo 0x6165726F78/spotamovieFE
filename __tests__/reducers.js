@@ -1,4 +1,4 @@
-import * as ActionCreators from '../app/actions/actions'
+import * as ActionCreators from '../app/actions'
 import reducer, {
   movies,
   moviesSurvey,
@@ -6,16 +6,16 @@ import reducer, {
   moviesDisliked,
   movieRecomm,
   user
-} from '../app/reducers/reducers'
+} from '../app/reducers'
 
 const movieMock = {
-  seen:false,
+  seen: false,
   poster_path: '/sjdfkjsiks.jpg',
   id: '1234',
   title: 'Lo que el viento se llevó'
 }
 
-const movieIdMocks = [1212334,42345345,52455]
+const movieIdMocks = [1212334, 42345345, 52455]
 
 const movieRecommMock = { movieId: 4324323 }
 
@@ -37,8 +37,8 @@ describe('Tests for reducer: movies', () => {
       type: 'GET_MOVIE_SUCCESS',
       response: movieMock
     })).toEqual(
-       [movieMock]
-    )
+      [movieMock]
+      )
   })
 
   it('should handle GET_MOVIE when the initial state is undefined', () => {
@@ -46,8 +46,8 @@ describe('Tests for reducer: movies', () => {
       type: 'GET_MOVIE_SUCCESS',
       response: movieMock
     })).toEqual(
-       [movieMock]
-    )
+      [movieMock]
+      )
   })
 
   it('should handle GET_MOVIE when type does not match', () => {
@@ -55,17 +55,17 @@ describe('Tests for reducer: movies', () => {
       type: 'PEPITO_NO_EXISTE',
       response: movieMock
     })).toEqual(
-       [movieMock]
-    )
+      [movieMock]
+      )
   })
 
   it('should update existing movies without creating a new record', () => {
     expect(movies([movieMock], {
       type: 'GET_MOVIE_SUCCESS',
-      response: Object.assign({}, movieMock, {title: 'Hoho'})
+      response: Object.assign({}, movieMock, { title: 'Hoho' })
     })).toEqual(
-      [Object.assign({}, movieMock, {title: 'Hoho'})]
-    )
+      [Object.assign({}, movieMock, { title: 'Hoho' })]
+      )
   })
 
   it('should handle RESET_MOVIES returning an empty array', () => {
@@ -74,7 +74,7 @@ describe('Tests for reducer: movies', () => {
       response: movieMock
     })).toEqual(
       []
-    )
+      )
   })
 })
 
@@ -123,29 +123,29 @@ describe('Tests for reducer: movieRecomm', () => {
       response: movieRecommMock
     })).toEqual(
       movieRecommMock
-    )
+      )
   })
 })
 
 describe('Tests for reducer: user', () => {
   it('should handle LOADING for state loading true', () => {
-    expect(user({loading: false}, {
+    expect(user({ loading: false }, {
       type: 'LOADING',
-      response: {loading: true}
+      response: { loading: true }
     })).toEqual(
-      {loading: true}
-    )
+      { loading: true }
+      )
   })
   it('should handle LOGIN when code is sent', () => {
     expect(user({}, {
       type: 'LOGIN_SUCCESS',
       response: {
-        name:'Arol'
+        name: 'Arol'
       }
     })).toEqual(
       {
-        name:'Arol'
+        name: 'Arol'
       }
-    )
+      )
   })
 })
