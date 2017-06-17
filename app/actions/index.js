@@ -1,6 +1,5 @@
 export const SpotifySymbol = 'apiSpotifySymbol'
 export const TMDBSymbol = 'apiTMDBSymbol'
-import config from '../../config'
 import types from './types'
 const {
   GET_MOVIES_DISCOVER,

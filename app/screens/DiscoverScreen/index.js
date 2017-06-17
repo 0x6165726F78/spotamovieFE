@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
-import { View, Text, StatusBar, TouchableOpacity, TouchableHighlight } from 'react-native';
-import { connect } from 'react-redux';
-import SwipeCards from 'react-native-swipe-cards';
-import { styles } from './styles';
-import { ButtonsGroup, Card, NoMoreCard } from './components';
+import React, { Component } from 'react'
+import {
+  View,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  TouchableHighlight,
+} from 'react-native'
+import { connect } from 'react-redux'
+import SwipeCards from 'react-native-swipe-cards'
+import { styles } from './styles'
+import { ButtonsGroup, Card, NoMoreCard } from './components'
 import * as ActionCreators from '../../actions'
-import { likeMovie, dislikeMovie } from '../../actions';
+import { likeMovie, dislikeMovie } from '../../actions'
 
-import { Spinner, Button } from 'nachos-ui';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Spinner, Button } from 'nachos-ui'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { themeManager } from 'nachos-ui'
 
-const iconHeart = (<Icon name="md-heart" size={40} color="white" />)
-const iconClose = (<Icon name="md-close" size={40} color="white" />)
+const iconHeart = <Icon name="md-heart" size={40} color="white" />
+const iconClose = <Icon name="md-close" size={40} color="white" />
 
 const buttonTheme = themeManager.getStyle('Button')
 const transparentButtonStyle = {
@@ -36,10 +42,10 @@ class SwiperEL extends Component {
         size={32}
       />,
     tabBarLabel: 'Discover',
-  };
+  }
 
   state = {
-    cardIndex: 0
+    cardIndex: 0,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,73 +56,72 @@ class SwiperEL extends Component {
     }
   }
   componentDidMount() {
-    this.setState({ cardIndex: 0 });
+    this.setState({ cardIndex: 0 })
     this.props.resetMovies()
     this.props.getMoviesSurvey()
-
   }
   handleNoMore = () => {
-    this.setState({ cardIndex: 0 });
+    this.setState({ cardIndex: 0 })
     this.props.resetMovies()
     this.props.navigation.navigate('Recomm')
   }
   handleYup = () => {
-    const movieId = this.props.movies[this.state.cardIndex].id;
-    this.setState({ cardIndex: this.state.cardIndex + 1 });
-    this.props.likeMovie(movieId);
+    const movieId = this.props.movies[this.state.cardIndex].id
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+    this.props.likeMovie(movieId)
   }
   handleNope = () => {
-    const movieId = this.props.movies[this.state.cardIndex].id;
-    this.setState({ cardIndex: this.state.cardIndex + 1 });
-    this.props.dislikeMovie(movieId);
+    const movieId = this.props.movies[this.state.cardIndex].id
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+    this.props.dislikeMovie(movieId)
   }
   clickSkip = () => {
-    const movieId = this.props.movies[this.state.cardIndex].id;
-    this.setState({ cardIndex: this.state.cardIndex + 1 });
-    console.log('hello');
-    this.props.skipMovie(movieId);
-    this._swiper._goToNextCard();
+    const movieId = this.props.movies[this.state.cardIndex].id
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+    console.log('hello')
+    this.props.skipMovie(movieId)
+    this._swiper._goToNextCard()
   }
   clickLike = () => {
-    const movieId = this.props.movies[this.state.cardIndex].id;
-    this.setState({ cardIndex: this.state.cardIndex + 1 });
-    this.props.likeMovie(movieId);
-    this._swiper._goToNextCard();
+    const movieId = this.props.movies[this.state.cardIndex].id
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+    this.props.likeMovie(movieId)
+    this._swiper._goToNextCard()
   }
   clickDislike = movie => {
-    const movieId = this.props.movies[this.state.cardIndex].id;
-    this.setState({ cardIndex: this.state.cardIndex + 1 });
-    this.props.dislikeMovie(movieId);
-    this._swiper._goToNextCard();
+    const movieId = this.props.movies[this.state.cardIndex].id
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+    this.props.dislikeMovie(movieId)
+    this._swiper._goToNextCard()
   }
 
   render() {
-    let title = '';
-    const movies = this.props.movies;
+    let title = ''
+    const movies = this.props.movies
     if (!movies.length || movies.length < this.props.moviesSurvey.length) {
       return (
         <View style={styles.containerLoader}>
           <View style={styles.titleView}>
             <Text style={styles.title}>
               LOADING SURVEY...
-              </Text>
+            </Text>
             <Spinner color="#94de45" />
           </View>
+          <StatusBar barStyle="light-content" />
         </View>
       )
     } else if (movies[this.state.cardIndex]) {
       return (
         <View style={styles.container}>
           <View style={styles.titleView}>
-            <Text
-              style={styles.title}>
+            <Text style={styles.title}>
               {movies[this.state.cardIndex].title}
             </Text>
           </View>
 
           <View style={styles.posterView}>
             <SwipeCards
-              ref={ref => this._swiper = ref}
+              ref={ref => (this._swiper = ref)}
               cards={movies}
               renderCard={data => <Card {...data} />}
               handleYup={this.handleYup}
@@ -129,14 +134,14 @@ class SwiperEL extends Component {
             <TouchableHighlight
               style={styles.btnHighLightClose}
               onPress={this.clickDislike}
-              underlayColor='#ED462C'
+              underlayColor="#ED462C"
             >
               <Text style={styles.txtHighLight}>{iconClose}</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.btnHighLightHeart}
               onPress={this.clickLike}
-              underlayColor='#94de45'
+              underlayColor="#94de45"
             >
               <Text style={styles.txtHighLight}>{iconHeart}</Text>
             </TouchableHighlight>
@@ -144,43 +149,41 @@ class SwiperEL extends Component {
 
           <View style={styles.buttonView2}>
             <Button
-              type='primary'
+              type="primary"
               theme={transparentButtonStyle}
               onPress={this.clickSkip}
-            // iconName='md-close'
+              // iconName='md-close'
             >
               I don't know
             </Button>
           </View>
-
+          <StatusBar barStyle="light-content" />
         </View>
-      );
-    }
-    else {
-      this.setState({ cardIndex: 0 });
+      )
+    } else {
+      this.setState({ cardIndex: 0 })
       this.props.navigation.navigate('Recomm')
-      return null;
-
+      return null
     }
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     movies: state.movies,
     moviesSurvey: state.moviesSurvey,
     user: state.user,
-    moviesSkipped: state.moviesSkipped
+    moviesSkipped: state.moviesSkipped,
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   resetMovies: () => dispatch(ActionCreators.resetMovies()),
-  getMovieFromId: (movieId) => dispatch(ActionCreators.getMovieFromId(movieId)),
+  getMovieFromId: movieId => dispatch(ActionCreators.getMovieFromId(movieId)),
   getMoviesSurvey: () => dispatch(ActionCreators.getMoviesSurvey()),
-  skipMovie: (movieId) => dispatch(ActionCreators.skipMovie(movieId)),
-  likeMovie: (movieId) => dispatch(ActionCreators.likeMovie(movieId)),
-  dislikeMovie: (movieId) => dispatch(ActionCreators.dislikeMovie(movieId)),
+  skipMovie: movieId => dispatch(ActionCreators.skipMovie(movieId)),
+  likeMovie: movieId => dispatch(ActionCreators.likeMovie(movieId)),
+  dislikeMovie: movieId => dispatch(ActionCreators.dislikeMovie(movieId)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SwiperEL);
+export default connect(mapStateToProps, mapDispatchToProps)(SwiperEL)

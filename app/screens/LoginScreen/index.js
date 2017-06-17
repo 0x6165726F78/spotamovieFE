@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import base64 from 'base-64'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -114,14 +114,14 @@ class LoginScreen extends Component {
             </View>
           </TouchableHighlight>
         </View>
-
+        <StatusBar hidden />
       </View>
     )
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.userToken) {
-      this.props.navigation.navigate('Wizard')
+      this.props.navigation.navigate('SwiperEL')
     }
   }
 

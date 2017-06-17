@@ -1,7 +1,7 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, Image } from 'react-native'
 
-const POSTER = 'https://image.tmdb.org/t/p/w500';
+const POSTER = 'https://image.tmdb.org/t/p/w500'
 
 const styles = {
   poster: {
@@ -28,18 +28,16 @@ const styles = {
   },
 }
 
-const Card = React.createClass({
+class Card extends Component {
   render() {
     return (
-      // <View style={styles.poster}>
-        <Image
-          resizeMode="cover"
-          style={styles.posterCard}
-          source={{uri: `${POSTER}/${this.props.poster_path}`}}
-        />
-      // </View>
+      <Image
+        resizeMode="cover"
+        style={styles.posterCard}
+        source={{ uri: `${POSTER}/${this.props.poster_path}` }}
+      />
     )
   }
-})
+}
 
-export default Card;
+export default Card
