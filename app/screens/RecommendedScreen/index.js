@@ -1,17 +1,32 @@
-import React, { Component } from 'react';
-import { View, Text, StatusBar, TouchableOpacity, Image, TouchableHighlight, Modal } from 'react-native';
-import { connect } from 'react-redux';
-import * as ActionCreators from '../../actions';
-import { Spinner } from 'nachos-ui';
-import { styles, buttonStyle } from './styles';
-import { Actions } from 'react-native-router-flux';
-import RecLoader from '../../components/RecLoader';
-import MovieCard from '../../components/MovieCard';
-import ActionButton from 'react-native-circular-action-menu';
-import Icon from 'react-native-vector-icons/Ionicons';
-const POSTER = 'https://image.tmdb.org/t/p/w500';
+import React, { Component } from 'react'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableHighlight,
+  Modal,
+} from 'react-native'
+import * as ActionCreators from '../../actions'
+import { styles, buttonStyle } from './styles'
+import Icon from 'react-native-vector-icons/Ionicons'
+const POSTER = 'https://image.tmdb.org/t/p/w500'
+import { connect } from 'react-redux'
+import RecLoader from '../../components/RecLoader'
+import MovieCard from '../../components/MovieCard'
+import config from '../../../config'
+const API_URL = 'https://api.themoviedb.org/3/movie/'
 
-class RecommendedScreen extends Component {
+@connect(data => RecommendedScreen.getData, ActionCreators)
+export default class RecommendedScreen extends Component {
+  state = {
+    modalVisible: false,
+    loading: true,
+    movie: null,
+  }
+
+  static getData = ({ movieRecomm }) => ({ movieRecomm })
+
   static navigationOptions = {
     title: 'RECOMMENDATION',
     headerTitleStyle: {
@@ -25,99 +40,66 @@ class RecommendedScreen extends Component {
         size={32}
       />,
     tabBarLabel: 'Last',
-  };
-
-  constructor() {
-    super();
-    this.state = { modalVisible: false };
   }
 
-  openModal = () => {
-    this.setState({ modalVisible: true });
-  }
-
-  closeModal = () => {
-    this.setState({ modalVisible: false });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.movieRecomm !== nextProps.movieRecomm) {
-      this.props.getMovieFromId(nextProps.movieRecomm);
+  async componentWillReceiveProps(nextProps) {
+    if (this.props.movieRecomm.movieId !== nextProps.movieRecomm.movieId) {
+      const movie = await fetch(
+        `${API_URL}${nextProps.movieRecomm.movieId}?api_key=${config.api_key}`
+      ).then(data => data.json())
+      this.setState({ movie, loading: false })
     }
   }
 
   componentDidMount() {
     this.props.getMovieRecommendation()
+    this.interval = setInterval(this.props.getMovieRecommendation, 10000)
   }
 
-  newRecomm = movie => {
-    this.props.getMovieRecommendation()
+  componentWillUnmount() {
+    window.clearInterval(this.interval)
   }
-  handleLogout() {
-    console.log('logoutting');
-    this.props.logout()
-    this.setState({ userLogged: false })
-    this.props.navigation.navigate('Login')
+
+  openModal = () => {
+    this.setState({ modalVisible: true })
+  }
+
+  closeModal = () => {
+    this.setState({ modalVisible: false })
   }
 
   render() {
-    const movie = this.props.movie;
-
-    if (!movie) {
-      return (
-        <RecLoader />
-      )
+    if (this.state.loading) {
+      return <RecLoader />
     }
 
     return (
       <View style={styles.container}>
-
         <View style={styles.posterView}>
-          <TouchableHighlight
-            onPress={this.openModal}
-          >
+          <TouchableHighlight onPress={this.openModal}>
             <View style={styles.poster}>
               <Image
                 style={styles.posterCard}
-                source={{ uri: `${POSTER}/${movie.poster_path}` }}
+                source={{
+                  uri: `${POSTER}/${this.state.movie.poster_path}`,
+                }}
               />
             </View>
           </TouchableHighlight>
+
+          <Modal
+            animationType="fade"
+            transparent
+            visible={this.state.modalVisible}
+          >
+            <TouchableHighlight onPress={this.closeModal} style={styles.modal1}>
+              <View style={styles.modal}>
+                <MovieCard movie={this.state.movie} />
+              </View>
+            </TouchableHighlight>
+          </Modal>
         </View>
-
-
-        <Modal
-          animationType="fade"
-          transparent
-          visible={this.state.modalVisible}
-        >
-          <TouchableHighlight
-            onPress={this.closeModal}
-            style={styles.modal1}>
-            <View style={styles.modal}>
-              <MovieCard />
-            </View>
-          </TouchableHighlight>
-        </Modal>
-
-
       </View>
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    movie: state.movies.find(movie => movie.id === parseInt(state.movieRecomm.movieId, 10)),
-    movieRecomm: state.movieRecomm.movieId,
-    user: state.user
-  }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(ActionCreators.logout()),
-  getMovieFromId: (movieId) => dispatch(ActionCreators.getMovieFromId(movieId)),
-  getMovieRecommendation: () => dispatch(ActionCreators.getMovieRecommendation()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(RecommendedScreen);
