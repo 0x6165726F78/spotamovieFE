@@ -1,5 +1,5 @@
 import LoginScreen from '../screens/LoginScreen'
-import Wizard from '../components/Wizard'
+import InfoScreen from '../screens/InfoScreen'
 import DiscoverScreen from '../screens/DiscoverScreen'
 import LikedListScreen from '../screens/LikedListScreen'
 import RecommendedScreen from '../screens/RecommendedScreen'
@@ -41,7 +41,7 @@ const TabBar = new TabNavigator(
 export default new StackNavigator(
   {
     Login: { screen: LoginScreen },
-    Wizard: { screen: Wizard },
+    Wizard: { screen: InfoScreen },
     Main: { screen: TabBar },
   },
   {

@@ -1,14 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import base64 from 'base-64';
-import { connect } from 'react-redux';
+import React, { Component, PropTypes } from 'react'
+import base64 from 'base-64'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { login, logout, loading } from '../../actions'
-import config from '../../../config';
-import querystring from 'querystring';
-import { Buffer } from 'buffer';
+import config from '../../../config'
+import querystring from 'querystring'
+import { Buffer } from 'buffer'
 import styles from './styles'
-import { Spinner } from 'nachos-ui';
-import Wizard from '../../components/Wizard';
+import { Spinner } from 'nachos-ui'
 
 import {
   Animated,
@@ -21,50 +20,51 @@ import {
   Linking,
   Button,
   Image,
-  StatusBar
-} from 'react-native';
+  StatusBar,
+} from 'react-native'
 
-
-
-const generateRandomString = function (length) {
-  var text = '';
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const generateRandomString = function(length) {
+  var text = ''
+  var possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
 
   for (let i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
   }
-  return text;
-};
+  return text
+}
 
-const scope = 'user-read-private user-read-email playlist-read-private';
-const state = generateRandomString(16);
-const query = ('https://accounts.spotify.com/authorize?' +
+const scope = 'user-read-private user-read-email playlist-read-private'
+const state = generateRandomString(16)
+const query =
+  'https://accounts.spotify.com/authorize?' +
   querystring.stringify({
     response_type: 'code',
     client_id: config.client_id,
     scope: scope,
     redirect_uri: config.redirect_uri,
-    state: state
-  }))
+    state: state,
+  })
 function spotifyOauth() {
-  Linking.openURL(query);
+  Linking.openURL(query)
 }
-
 
 class LoginScreen extends Component {
   static navigationOptions = {
     header: null,
-  };
+  }
 
   handleOpenSpotifyURL(event) {
-    let code = event.url.match(/code=(.+)\&/);
-    code = code[1];
-    this.props.login(code);
+    let code = event.url.match(/code=(.+)\&/)
+    code = code[1]
+    this.props.login(code)
   }
 
   handleGreeting() {
     if (this.props.user.name !== undefined) {
-      return <Text style={styles.startText}>Welcome {this.props.user.name}</Text>
+      return (
+        <Text style={styles.startText}>Welcome {this.props.user.name}</Text>
+      )
     } else {
       return <Text style={styles.startText}>Welcome</Text>
     }
@@ -73,8 +73,7 @@ class LoginScreen extends Component {
   handleLogin() {
     this.props.loading()
     spotifyOauth()
-    Linking.addEventListener('url', this.handleOpenSpotifyURL.bind(this));
-
+    Linking.addEventListener('url', this.handleOpenSpotifyURL.bind(this))
   }
 
   handleLogout() {
@@ -91,23 +90,30 @@ class LoginScreen extends Component {
           </Text>
         </View>
         <View style={styles.containerSubheading}>
-          <Text style={styles.subheading}>Get movie recommendations based on your music preferences</Text>
+          <Text style={styles.subheading}>
+            Get movie recommendations based on your music preferences
+          </Text>
         </View>
         <View style={styles.containerInstructions}>
-          <Text style={styles.instructions}>Sign in with Spotify so we can process your playlists</Text>
+          <Text style={styles.instructions}>
+            Sign in with Spotify so we can process your playlists
+          </Text>
         </View>
         <View style={styles.startContainer}>
           <TouchableHighlight
             style={styles.start}
             onPress={this.handleLogin.bind(this)}
-            underlayColor='red'>
+            underlayColor="red"
+          >
             <View style={styles.loginButtonContainer}>
-              <Image style={styles.spotifyIcon} source={require('./spotifyIconBlack.png')} />
+              <Image
+                style={styles.spotifyIcon}
+                source={require('./spotifyIconBlack.png')}
+              />
               <Text style={styles.startText}>SIGN IN WITH SPOTIFY</Text>
             </View>
           </TouchableHighlight>
         </View>
-
 
       </View>
     )
@@ -120,7 +126,6 @@ class LoginScreen extends Component {
   }
 
   render() {
-
     if (this.props.user.loading) {
       return (
         <View style={styles.containerLoader}>
@@ -132,33 +137,22 @@ class LoginScreen extends Component {
           </View>
           <StatusBar hidden />
         </View>
-      );
-    }
-    if (this.props.user.userToken) {
-      return (
-        <Wizard />
-      );
-    } else {
-      return (
-        this.renderLoginScreen()
       )
+    } else {
+      return this.renderLoginScreen()
     }
-
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   loading: () => dispatch(loading()),
-  login: (code) => dispatch(login(code)),
-  logout: () => dispatch(logout())
+  login: code => dispatch(login(code)),
+  logout: () => dispatch(logout()),
 })
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   navigationState: state.navigationState,
   user: state.user,
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
