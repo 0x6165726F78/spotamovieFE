@@ -1,4 +1,3 @@
-import Card from './Card';
-import NoMoreCard from './NoMoreCard';
+import Card from './Card'
 
-export { Card, NoMoreCard };
+export { Card }
