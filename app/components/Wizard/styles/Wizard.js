@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   skipText: {
     color: 'grey',
     fontFamily: 'Raleway-Medium',
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center'
   },
   containerStart: {
@@ -49,13 +49,13 @@ export const styles = StyleSheet.create({
   start: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor:'#62C654',
+    backgroundColor: '#62C654',
     alignSelf: 'stretch',
     padding: 20
   },
   startText: {
-    color:'white',
-    textAlign:'center',
+    color: 'white',
+    textAlign: 'center',
     fontSize: 24
   },
   arrowIcon: {

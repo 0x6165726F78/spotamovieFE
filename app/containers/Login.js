@@ -21,7 +21,8 @@ import {
   TouchableHighlight,
   Linking,
   Button,
-  Image
+  Image,
+  StatusBar
 } from 'react-native';
 
 // const {
@@ -61,14 +62,15 @@ function spotifyOauth() {
 
 
 class Login extends Component {
+  static navigationOptions = {
+    header: null,
+  };
 
   componentDidMount() {
 
   }
 
-  componentWillReceiveProps(nextProps) {
 
-  }
 
   handleOpenSpotifyURL(event) {
     let code = event.url.match(/code=(.+)\&/);
@@ -121,8 +123,16 @@ class Login extends Component {
             </View>
           </TouchableHighlight>
         </View>
+
+
       </View>
     )
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.userToken) {
+      this.props.navigation.navigate('Wizard')
+    }
   }
 
   render() {
@@ -136,6 +146,7 @@ class Login extends Component {
             </Text>
             <Spinner color="#94de45" />
           </View>
+          <StatusBar hidden />
         </View>
       );
     }

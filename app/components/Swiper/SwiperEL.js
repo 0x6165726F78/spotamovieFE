@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StatusBar, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import SwipeCards from 'react-native-swipe-cards';
-import  { styles } from './styles/SwiperEl';
+import { styles } from './styles/SwiperEl';
 import { ButtonsGroup, Card, NoMoreCard } from './components';
 import ActionCreators from '../../actions'
 import { likeMovie, dislikeMovie } from '../../actions/actions';
@@ -16,8 +16,8 @@ import { themeManager } from 'nachos-ui'
 import Recomm from '../Recomm/Recomm';
 // import RecLoader from '../RecLoader/RecLoader';
 
-const iconHeart =(<Icon name="md-heart" size={40} color="white" />)
-const iconClose =(<Icon name="md-close" size={40} color="white" />)
+const iconHeart = (<Icon name="md-heart" size={40} color="white" />)
+const iconClose = (<Icon name="md-close" size={40} color="white" />)
 
 const buttonTheme = themeManager.getStyle('Button')
 const transparentButtonStyle = {
@@ -28,12 +28,27 @@ const transparentButtonStyle = {
 btnStyle = { margin: 5 }
 
 class SwiperEL extends Component {
+  static navigationOptions = {
+    title: 'DISCOVER',
+    headerTitleStyle: {
+      fontSize: 20,
+    },
+
+    tabBarIcon: ({ tintColor, focused }) =>
+      <Icon
+        name={`ios-search${focused ? '' : '-outline'}`}
+        color={tintColor}
+        size={32}
+      />,
+    tabBarLabel: 'Discover',
+  };
+
   state = {
     cardIndex: 0
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.moviesSurvey !== nextProps.moviesSurvey) {
+    if (this.props.moviesSurvey !== nextProps.moviesSurvey) {
       nextProps.moviesSurvey.map(movieId => {
         this.props.getMovieFromId(movieId)
       })
@@ -48,7 +63,7 @@ class SwiperEL extends Component {
   handleNoMore = () => {
     this.setState({ cardIndex: 0 });
     this.props.resetMovies()
-    Actions.Recomm()
+    this.props.navigation.navigate('Recomm')
   }
   handleYup = () => {
     const movieId = this.props.movies[this.state.cardIndex].id;
@@ -60,7 +75,7 @@ class SwiperEL extends Component {
     this.setState({ cardIndex: this.state.cardIndex + 1 });
     this.props.dislikeMovie(movieId);
   }
-  clickSkip =() => {
+  clickSkip = () => {
     const movieId = this.props.movies[this.state.cardIndex].id;
     this.setState({ cardIndex: this.state.cardIndex + 1 });
     console.log('hello');
@@ -81,19 +96,19 @@ class SwiperEL extends Component {
   }
 
   render() {
-    let title='';
+    let title = '';
     const movies = this.props.movies;
     if (!movies.length || movies.length < this.props.moviesSurvey.length) {
-        return (
-          <View style={styles.containerLoader}>
-            <View style={styles.titleView}>
-              <Text style={styles.title}>
-                LOADING SURVEY...
+      return (
+        <View style={styles.containerLoader}>
+          <View style={styles.titleView}>
+            <Text style={styles.title}>
+              LOADING SURVEY...
               </Text>
-              <Spinner color ="#94de45"/>
-            </View>
+            <Spinner color="#94de45" />
           </View>
-        )
+        </View>
+      )
     } else if (movies[this.state.cardIndex]) {
       return (
         <View style={styles.container}>
@@ -120,14 +135,14 @@ class SwiperEL extends Component {
               style={styles.btnHighLightClose}
               onPress={this.clickDislike}
               underlayColor='#ED462C'
-              >
+            >
               <Text style={styles.txtHighLight}>{iconClose}</Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.btnHighLightHeart}
               onPress={this.clickLike}
               underlayColor='#94de45'
-              >
+            >
               <Text style={styles.txtHighLight}>{iconHeart}</Text>
             </TouchableHighlight>
           </View>
@@ -137,8 +152,8 @@ class SwiperEL extends Component {
               type='primary'
               theme={transparentButtonStyle}
               onPress={this.clickSkip}
-              // iconName='md-close'
-              >
+            // iconName='md-close'
+            >
               I don't know
             </Button>
           </View>
@@ -148,7 +163,7 @@ class SwiperEL extends Component {
     }
     else {
       this.setState({ cardIndex: 0 });
-      Actions.Recomm()
+      this.props.navigation.navigate('Recomm')
       return null;
 
     }

@@ -6,12 +6,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   titleView: {
     flex: 0.1,
     // backgroundColor: 'pink',
     flexDirection: 'column',
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
   },
@@ -23,14 +24,15 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     // backgroundColor: 'purple',
     color: 'white',
-    marginBottom:10,
+    marginBottom: 10,
   },
   posterView: {
-    flex: 0.6,
+    flex: 1,
     // backgroundColor:'cyan',
     paddingRight: 60,
     paddingLeft: 60,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   posterCard: {
     borderRadius: 10,
@@ -44,7 +46,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.8,
   },
   poster: {
-    borderRadius: 10
+    borderRadius: 10,
   },
   buttonRow1: {
     marginTop: 0,
@@ -80,17 +82,17 @@ export const styles = StyleSheet.create({
 });
 
 export const buttonStyle = StyleSheet.create({
-  start:{
+  start: {
     padding: 10,
     marginTop: 30,
-    backgroundColor:'#23222E',
-    borderRadius:30,
+    backgroundColor: '#23222E',
+    borderRadius: 30,
     borderWidth: 1,
     borderColor: '#fff'
   },
-  startText:{
-      color:'#fff',
-      textAlign:'center',
-      fontSize: 16
+  startText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16
   }
 });
