@@ -7,8 +7,10 @@ import moviesDisliked from './moviesDislikedReducer'
 import movieRecomm from './movieRecommReducer'
 import moviesCached from './moviesCachedReducer'
 import likedListScreen from './likedListScreenReducer'
+import types from '../actions/types'
+const { LOGOUT } = types
 
-export default combineReducers({
+const reducers = combineReducers({
   movies,
   user,
   moviesSurvey,
@@ -18,3 +20,11 @@ export default combineReducers({
   moviesCached,
   likedListScreen,
 })
+
+export default (state, action) => {
+  if (action.type === LOGOUT) {
+    state = {}
+  }
+
+  return reducers(state, action)
+}

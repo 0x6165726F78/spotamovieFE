@@ -15,15 +15,28 @@ import { connect } from 'react-redux'
 import MovieItem from './components/MovieItem'
 import MovieCard from '../../components/MovieCard'
 import { styles } from './styles'
+import Octicons from 'react-native-vector-icons/Octicons'
+
+const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
+  <TouchableOpacity
+    style={{ marginRight: 8 }}
+    onPress={() => {
+      logout()
+      onPress()
+    }}
+  >
+    <Octicons name="sign-out" size={28} color="white" />
+  </TouchableOpacity>
+)
 
 @connect(data => LikedListScreen.getData, ActionCreators)
 export default class LikedListScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: 'MOVIES LIKED',
     headerTitleStyle: {
       fontSize: 20,
     },
-
+    headerRight: <SignOutBtn onPress={() => navigation.navigate('Login')} />,
     tabBarIcon: ({ tintColor, focused }) =>
       <Icon
         name={`ios-heart${focused ? '' : '-outline'}`}
@@ -31,7 +44,7 @@ export default class LikedListScreen extends Component {
         size={32}
       />,
     tabBarLabel: 'Liked',
-  }
+  })
 
   filteredMovies = []
 
