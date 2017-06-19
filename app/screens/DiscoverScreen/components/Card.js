@@ -13,8 +13,6 @@ const styles = {
   },
   posterCard: {
     borderRadius: 10,
-    // width: 230,
-    // height: 368,
     width: 230,
     height: null,
     flex: 1,
