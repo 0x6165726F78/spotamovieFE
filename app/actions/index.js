@@ -17,6 +17,7 @@ const {
   LOADING,
   LOGOUT,
   LOGIN,
+  ON_VALUE_CHANGE,
 } = types
 
 export const getMoviesDiscover = () => ({
@@ -27,12 +28,13 @@ export const getMoviesDiscover = () => ({
   },
 })
 
-export const getMovieFromId = movieId => ({
+export const getMovieFromId = (movieId, list = false) => ({
   type: GET_MOVIE,
   [TMDBSymbol]: {
     endpoint: `/movie/${movieId}`,
     method: 'GET',
   },
+  list,
 })
 
 export const getMovieRecommendation = () => ({
@@ -73,6 +75,7 @@ export const dislikeMovie = movieId => ({
     endpoint: `/movies/${movieId}/dislike`,
     method: 'POST',
   },
+  movieId,
 })
 
 export const skipMovie = movieId => ({
@@ -85,6 +88,7 @@ export const likeMovie = movieId => ({
     endpoint: `/movies/${movieId}/like`,
     method: 'POST',
   },
+  movieId,
 })
 
 export const unLikeMovie = movieId => ({
@@ -93,7 +97,7 @@ export const unLikeMovie = movieId => ({
     endpoint: `/movies/${movieId}/unlike`,
     method: 'POST',
   },
-  success: getMoviesLiked,
+  movieId,
 })
 
 export const unDislikeMovie = movieId => ({
@@ -102,7 +106,7 @@ export const unDislikeMovie = movieId => ({
     endpoint: `/movies/${movieId}/undislike`,
     method: 'POST',
   },
-  success: getMoviesDisliked,
+  movieId,
 })
 
 export const resetMovies = () => ({
@@ -126,4 +130,9 @@ export const login = code => ({
       code: code,
     },
   },
+})
+
+export const onValueChange = value => ({
+  type: ON_VALUE_CHANGE,
+  value,
 })

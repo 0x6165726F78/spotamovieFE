@@ -6,6 +6,7 @@ import moviesLiked from './moviesLikedReducer'
 import moviesDisliked from './moviesDislikedReducer'
 import movieRecomm from './movieRecommReducer'
 import moviesCached from './moviesCachedReducer'
+import likedListScreen from './likedListScreenReducer'
 
 export default combineReducers({
   movies,
@@ -15,4 +16,5 @@ export default combineReducers({
   moviesDisliked,
   movieRecomm,
   moviesCached,
+  likedListScreen,
 })
