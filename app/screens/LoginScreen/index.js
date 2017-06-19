@@ -123,11 +123,13 @@ class LoginScreen extends Component {
     )
   }
 
-  componentWillUnmount() {}
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.userToken) {
-      this.props.navigation.navigate('SwiperEL')
+      if (nextProps.user.firstLogin) {
+        this.props.navigation.navigate('Wizard')
+      } else {
+        this.props.navigation.navigate('SwiperEL')
+      }
     }
   }
 
