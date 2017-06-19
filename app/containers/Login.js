@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'; 
 import base64 from 'base-64';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'

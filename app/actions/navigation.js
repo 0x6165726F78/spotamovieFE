@@ -1,5 +1,5 @@
-import * as types from './types'
-import ReactNative from 'react-native'
+import * as types from './types';
+import ReactNative from 'react-native';
 const { NavigationExperimental } = ReactNative
 // const { jumpToIndex } = NavigationExperimental.StateUtils;
 console.log(NavigationExperimental)

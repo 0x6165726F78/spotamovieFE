@@ -1,6 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
+const createReactClass = require('create-react-class');
+
+
 const POSTER = 'https://image.tmdb.org/t/p/w500';
 
 const styles = {
@@ -28,7 +31,7 @@ const styles = {
   },
 }
 
-const Card = React.createClass({
+const Card = createReactClass({
   render() {
     return (
       // <View style={styles.poster}>

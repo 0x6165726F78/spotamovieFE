@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'; 
 import { Actions } from 'react-native-router-flux';
 import { styles } from './styles/Wizard';
 import Icon from 'react-native-vector-icons/Ionicons';

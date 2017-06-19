@@ -1,4 +1,5 @@
-import * as ActionCreators from '../app/actions/actions'
+import * as ActionCreators from '../app/actions/actions';
+
 import reducer, {
   movies,
   moviesSurvey,
