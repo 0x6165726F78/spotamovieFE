@@ -29,8 +29,13 @@ const transparentButtonStyle = {
 
 btnStyle = { margin: 5 }
 
+// getMovieRecommendation
 @connect(data => DiscoverScreen.getData, ActionCreators)
 export default class DiscoverScreen extends Component {
+  componentDidMount() {
+    this.props.getMovieRecommendation()
+  }
+
   state = {
     cardIndex: 0,
     modalVisible: false,
@@ -41,26 +46,25 @@ export default class DiscoverScreen extends Component {
     headerTitleStyle: {
       fontSize: 20,
     },
-
     tabBarIcon: ({ tintColor, focused }) =>
       <Icon
         name={`ios-search${focused ? '' : '-outline'}`}
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Discover',
+    tabBarLabel: 'Suggestions',
   }
-  static getData = ({ movies, moviesSurvey }) => ({ movies, moviesSurvey })
 
-  componentDidMount() {
-    this.props.getMoviesSurvey()
+  static getData = ({ movieRecomm, movies }) => {
+    return {
+      movieRecomm,
+      movies,
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.moviesSurvey !== nextProps.moviesSurvey) {
-      nextProps.moviesSurvey.map(movieId => {
-        this.props.getMovieFromId(movieId)
-      })
+    if (nextProps.movieRecomm !== this.props.movieRecomm) {
+      nextProps.movieRecomm.map(movieId => this.props.getMovieFromId(movieId))
     }
   }
 
@@ -84,33 +88,9 @@ export default class DiscoverScreen extends Component {
   }
 
   handleNoMore = () => {
-    this.props.getMoviesSurvey()
+    this.props.getMovieRecommendation()
     this.setState({ cardIndex: 0 })
     this.props.resetMovies()
-  }
-
-  clickSkip = () => {
-    this._swiper._goToNextCard()
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
-
-  clickLike = () => {
-    const { id } = this.props.movies[this.state.cardIndex]
-    console.log('like', id)
-    this.props.likeMovie(String(id))
-    this._swiper._goToNextCard()
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
-
-  clickDislike = () => {
-    const { id } = this.props.movies[this.state.cardIndex]
-    console.log('dislike', id)
-    this.props.dislikeMovie(String(id))
-    this._swiper._goToNextCard()
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
-  openModal = movie => {
-    this.setState({ modalVisible: true, movie })
   }
 
   _renderMainScreen = () => {
@@ -180,19 +160,46 @@ export default class DiscoverScreen extends Component {
         </Modal>
 
         <StatusBar hidden={false} barStyle="light-content" />
-
       </View>
     )
+  }
+  closeModal = () => {
+    this.setState({ modalVisible: false })
+  }
+
+  openModal = movie => {
+    this.setState({ modalVisible: true, movie })
   }
 
   closeModal = () => {
     this.setState({ modalVisible: false })
   }
 
-  render() {
-    const { movies, moviesSurvey } = this.props
+  clickSkip = () => {
+    this._swiper._goToNextCard()
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+  }
 
-    if (!movies.length || movies.length < moviesSurvey.length) {
+  clickLike = () => {
+    const { id } = this.props.movies[this.state.cardIndex]
+    console.log('like', id)
+    this.props.likeMovie(String(id))
+    this._swiper._goToNextCard()
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+  }
+
+  clickDislike = () => {
+    const { id } = this.props.movies[this.state.cardIndex]
+    console.log('dislike', id)
+    this.props.dislikeMovie(String(id))
+    this._swiper._goToNextCard()
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+  }
+
+  render() {
+    const { movies, movieRecomm } = this.props
+
+    if (!movies.length || movies.length < movieRecomm.length) {
       return this._renderLoadingIndicator()
     }
 
