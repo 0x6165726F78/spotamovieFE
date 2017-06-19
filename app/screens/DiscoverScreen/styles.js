@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,13 +12,13 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   titleView: {
     flex: 0.1,
     // backgroundColor: 'pink',
     flexDirection: 'column',
-    alignItems:'center',
+    alignItems: 'center',
     justifyContent: 'center',
     marginTop: 40,
   },
@@ -30,14 +30,14 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     // backgroundColor: 'purple',
     color: 'white',
-    marginBottom:10,
+    marginBottom: 10,
   },
   posterView: {
     flex: 0.6,
     // backgroundColor:'cyan',
     paddingRight: 60,
     paddingLeft: 60,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   buttonRow1: {
     marginTop: 20,
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     width: 230,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   buttonView1: {
     // flex: 0.1,
@@ -62,38 +62,52 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
-    width: 200
+    width: 200,
   },
   btnStyle: {
     // flex: 1,
-    margin: 5
+    margin: 5,
   },
-  btnHighLightHeart:{
+  btnHighLightHeart: {
     height: 70,
     width: 70,
     justifyContent: 'center',
     padding: 10,
     margin: 10,
-    backgroundColor:'#94de45',
-    borderRadius:35,
+    backgroundColor: '#94de45',
+    borderRadius: 35,
     borderWidth: 2,
-    borderColor: 'rgba(0,0,0,0)'
+    borderColor: 'rgba(0,0,0,0)',
   },
-  btnHighLightClose:{
+  btnHighLightClose: {
     height: 70,
     width: 70,
     justifyContent: 'center',
     padding: 10,
     margin: 10,
-    backgroundColor:'#ED462C',
-    borderRadius:35,
+    backgroundColor: '#ED462C',
+    borderRadius: 35,
     borderWidth: 2,
-    borderColor: 'rgba(0,0,0,0)'
+    borderColor: 'rgba(0,0,0,0)',
   },
-  txtHighLight:{
-    marginTop:5,
+  txtHighLight: {
+    marginTop: 5,
     justifyContent: 'center',
-    color:'#94de45',
-    textAlign:'center',
-  }
-});
+    color: '#94de45',
+    textAlign: 'center',
+  },
+  modal1: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+
+  modal: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: 'rgba(0,0,0,0.8)',
+  },
+})

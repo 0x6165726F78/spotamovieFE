@@ -5,11 +5,16 @@ import {
   StyleSheet,
   SegmentedControlIOS,
   ScrollView,
+  Modal,
+  TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import * as ActionCreators from '../../actions'
 import { connect } from 'react-redux'
 import MovieItem from './components/MovieItem'
+import MovieCard from '../../components/MovieCard'
+import { styles } from './styles'
 
 @connect(data => LikedListScreen.getData, ActionCreators)
 export default class LikedListScreen extends Component {
@@ -54,6 +59,7 @@ export default class LikedListScreen extends Component {
   }
 
   state = {
+    modalVisible: false,
     cardIndex: 0,
     value: 'Liked',
     values: ['Liked', 'Disliked'],
@@ -61,6 +67,7 @@ export default class LikedListScreen extends Component {
     fetchedLiked: false,
     fetchedDisliked: false,
     filteredMovies: [],
+    movie: null,
   }
 
   _onChange = event => {
@@ -141,8 +148,15 @@ export default class LikedListScreen extends Component {
     this.props.getMoviesDisliked()
   }
 
+  closeModal = () => {
+    this.setState({ modalVisible: false })
+  }
+
+  openModal = movie => {
+    this.setState({ modalVisible: true, movie })
+  }
+
   render() {
-    console.log(this.props)
     return (
       <View
         style={{
@@ -177,18 +191,33 @@ export default class LikedListScreen extends Component {
             }}
           >
             {this.props.filteredMovies.map(movie =>
-              <MovieItem
+              <TouchableOpacity
                 key={movie.id}
-                title={movie.title}
-                image={movie.poster_path}
-                onRemove={() => this.handleRemove(movie.id)}
-              />
+                onPress={() => this.openModal(movie)}
+              >
+                <MovieItem
+                  title={movie.title}
+                  image={movie.poster_path}
+                  onRemove={() => this.handleRemove(movie.id)}
+                />
+              </TouchableOpacity>
             )}
           </View>
         </ScrollView>
+
+        <Modal
+          animationType="fade"
+          transparent
+          visible={this.state.modalVisible}
+        >
+          <TouchableHighlight onPress={this.closeModal} style={styles.modal1}>
+            <View style={styles.modal}>
+              <MovieCard movie={this.state.movie} />
+            </View>
+          </TouchableHighlight>
+        </Modal>
+
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({})

@@ -5,6 +5,8 @@ import {
   StyleSheet,
   StatusBar,
   TouchableHighlight,
+  TouchableOpacity,
+  Modal,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import SwipeCards from 'react-native-swipe-cards'
@@ -13,6 +15,8 @@ import { connect } from 'react-redux'
 import { styles } from './styles'
 import { Spinner, Button, themeManager } from 'nachos-ui'
 import { ButtonsGroup, Card, NoMoreCard } from './components'
+import LoadingView from '../../components/LoadingView'
+import MovieCard from '../../components/MovieCard'
 
 const iconHeart = <Icon name="md-heart" size={40} color="white" />
 const iconClose = <Icon name="md-close" size={40} color="white" />
@@ -29,6 +33,7 @@ btnStyle = { margin: 5 }
 export default class DiscoverScreen extends Component {
   state = {
     cardIndex: 0,
+    modalVisible: false,
   }
 
   static navigationOptions = {
@@ -60,17 +65,7 @@ export default class DiscoverScreen extends Component {
   }
 
   _renderLoadingIndicator = () => {
-    return (
-      <View style={styles.containerLoader}>
-        <View style={styles.titleView}>
-          <Text style={styles.title}>
-            LOADING SURVEY...
-          </Text>
-          <Spinner color="#94de45" />
-        </View>
-        <StatusBar barStyle="light-content" />
-      </View>
-    )
+    return <LoadingView title="Loading Movies..." />
   }
 
   handleYup = ({ id }) => {
@@ -94,6 +89,11 @@ export default class DiscoverScreen extends Component {
     this.props.resetMovies()
   }
 
+  clickSkip = () => {
+    this._swiper._goToNextCard()
+    this.setState({ cardIndex: this.state.cardIndex + 1 })
+  }
+
   clickLike = () => {
     const { id } = this.props.movies[this.state.cardIndex]
     console.log('like', id)
@@ -109,6 +109,9 @@ export default class DiscoverScreen extends Component {
     this._swiper._goToNextCard()
     this.setState({ cardIndex: this.state.cardIndex + 1 })
   }
+  openModal = movie => {
+    this.setState({ modalVisible: true, movie })
+  }
 
   _renderMainScreen = () => {
     return (
@@ -120,7 +123,11 @@ export default class DiscoverScreen extends Component {
               </Text>
             : null}
         </View>
-        <View style={styles.posterView}>
+        <TouchableOpacity
+          onPress={() =>
+            this.openModal(this.props.movies[this.state.cardIndex])}
+          style={styles.posterView}
+        >
           <SwipeCards
             ref={ref => (this._swiper = ref)}
             cards={this.props.movies}
@@ -129,7 +136,7 @@ export default class DiscoverScreen extends Component {
             handleNope={this.handleNope}
             renderNoMoreCards={this.handleNoMore}
           />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.buttonRow1}>
           <TouchableHighlight
@@ -157,9 +164,29 @@ export default class DiscoverScreen extends Component {
           >
             I don't know
           </Button>
+
         </View>
+
+        <Modal
+          animationType="fade"
+          transparent
+          visible={this.state.modalVisible}
+        >
+          <TouchableHighlight onPress={this.closeModal} style={styles.modal1}>
+            <View style={styles.modal}>
+              <MovieCard movie={this.state.movie} />
+            </View>
+          </TouchableHighlight>
+        </Modal>
+
+        <StatusBar hidden={false} barStyle="light-content" />
+
       </View>
     )
+  }
+
+  closeModal = () => {
+    this.setState({ modalVisible: false })
   }
 
   render() {

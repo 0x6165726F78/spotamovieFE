@@ -9,7 +9,6 @@ const POSTER = 'https://image.tmdb.org/t/p/w500'
 
 export default class MovieCard extends Component {
   render() {
-    console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrr', this.props)
     const overview = this.props.movie.overview
     const lengthOv = 312
     let trimmedOv = overview.length > lengthOv

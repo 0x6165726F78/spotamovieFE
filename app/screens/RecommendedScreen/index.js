@@ -16,6 +16,7 @@ import RecLoader from '../../components/RecLoader'
 import MovieCard from '../../components/MovieCard'
 import config from '../../../config'
 const API_URL = 'https://api.themoviedb.org/3/movie/'
+import LoadingView from '../../components/LoadingView'
 
 @connect(data => RecommendedScreen.getData, ActionCreators)
 export default class RecommendedScreen extends Component {
@@ -70,7 +71,7 @@ export default class RecommendedScreen extends Component {
 
   render() {
     if (this.state.loading) {
-      return <RecLoader />
+      return <LoadingView title="Loading Recommendation..." />
     }
 
     return (

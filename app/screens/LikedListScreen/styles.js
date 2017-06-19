@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   titleView: {
     flex: 0.1,
@@ -31,8 +31,22 @@ export const styles = StyleSheet.create({
     // backgroundColor: 'purple',
     color: 'white',
     marginBottom: 10,
-  }
-});
+  },
+  modal1: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+
+  modal: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: 'rgba(0,0,0,0.8)',
+  },
+})
 
 export const buttonStyle = StyleSheet.create({
   start: {
@@ -41,11 +55,11 @@ export const buttonStyle = StyleSheet.create({
     backgroundColor: '#23222E',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
   startText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 })

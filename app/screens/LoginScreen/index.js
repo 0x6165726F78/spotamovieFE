@@ -54,6 +54,10 @@ class LoginScreen extends Component {
     header: null,
   }
 
+  componentWillMount() {
+    console.log('loooogin', this.props)
+  }
+
   handleOpenSpotifyURL(event) {
     let code = event.url.match(/code=(.+)\&/)
     code = code[1]
@@ -119,6 +123,8 @@ class LoginScreen extends Component {
     )
   }
 
+  componentWillUnmount() {}
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.userToken) {
       this.props.navigation.navigate('SwiperEL')
@@ -135,7 +141,7 @@ class LoginScreen extends Component {
             </Text>
             <Spinner color="#94de45" />
           </View>
-          <StatusBar hidden />
+          <StatusBar hidden={false} barStyle="light-content" />
         </View>
       )
     } else {
