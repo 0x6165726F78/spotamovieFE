@@ -6,86 +6,88 @@ describe('Action creators for SpotifySymbol', () => {
       type: 'GET_MOVIE_RECOMMENDATION',
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/recommendation`,
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     }
-    expect(ActionCreators.getMovieRecommendation()).toEqual(expectedAction);
+    expect(ActionCreators.getMovieRecommendation()).toEqual(expectedAction)
   })
   it('getMoviesSurvey', () => {
     const expectedAction = {
       type: 'GET_MOVIES_SURVEY',
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/survey`,
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     }
-    expect(ActionCreators.getMoviesSurvey()).toEqual(expectedAction);
+    expect(ActionCreators.getMoviesSurvey()).toEqual(expectedAction)
   })
   it('getMoviesLiked', () => {
     const expectedAction = {
       type: 'GET_MOVIES_LIKED',
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/liked`,
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     }
-    expect(ActionCreators.getMoviesLiked()).toEqual(expectedAction);
+    expect(ActionCreators.getMoviesLiked()).toEqual(expectedAction)
   })
   it('getMoviesDisliked', () => {
     const expectedAction = {
       type: 'GET_MOVIES_DISLIKED',
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/disliked`,
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     }
-    expect(ActionCreators.getMoviesDisliked()).toEqual(expectedAction);
+    expect(ActionCreators.getMoviesDisliked()).toEqual(expectedAction)
   })
   it('dislikeMovie', () => {
     const movieId = '11'
     const expectedAction = {
       type: 'DISLIKE_MOVIE',
+      movieId,
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/${movieId}/dislike`,
-        method: 'POST'
-      }
+        method: 'POST',
+      },
     }
-    expect(ActionCreators.dislikeMovie(movieId)).toEqual(expectedAction);
+    expect(ActionCreators.dislikeMovie(movieId)).toEqual(expectedAction)
   })
   it('likeMovie', () => {
     const movieId = '11'
     const expectedAction = {
       type: 'LIKE_MOVIE',
+      movieId,
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/${movieId}/like`,
-        method: 'POST'
-      }
+        method: 'POST',
+      },
     }
-    expect(ActionCreators.likeMovie(movieId)).toEqual(expectedAction);
+    expect(ActionCreators.likeMovie(movieId)).toEqual(expectedAction)
   })
   it('unLikeMovie', () => {
     const movieId = '11'
     const expectedAction = {
       type: 'UNLIKE_MOVIE',
+      movieId,
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/${movieId}/unlike`,
-        method: 'POST'
+        method: 'POST',
       },
-      success: ActionCreators.getMoviesLiked
     }
-    expect(ActionCreators.unLikeMovie(movieId)).toEqual(expectedAction);
+    expect(ActionCreators.unLikeMovie(movieId)).toEqual(expectedAction)
   })
   it('unDislikeMovie', () => {
     const movieId = '11'
     const expectedAction = {
       type: 'UNDISLIKE_MOVIE',
+      movieId,
       [ActionCreators.SpotifySymbol]: {
         endpoint: `/movies/${movieId}/undislike`,
-        method: 'POST'
+        method: 'POST',
       },
-      success: ActionCreators.getMoviesDisliked
     }
-    expect(ActionCreators.unDislikeMovie(movieId)).toEqual(expectedAction);
+    expect(ActionCreators.unDislikeMovie(movieId)).toEqual(expectedAction)
   })
 })
 
@@ -95,21 +97,23 @@ describe('Action creators for TMDB', () => {
       type: 'GET_MOVIES_DISCOVER',
       [ActionCreators.TMDBSymbol]: {
         endpoint: '/discover/movie',
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     }
-    expect(ActionCreators.getMoviesDiscover()).toEqual(expectedAction);
+    expect(ActionCreators.getMoviesDiscover()).toEqual(expectedAction)
   })
   it('getMovieFromId', () => {
     const movieId = '11'
+    const list = false
     const expectedAction = {
       type: 'GET_MOVIE',
+      list,
       [ActionCreators.TMDBSymbol]: {
         endpoint: `/movie/${movieId}`,
-        method: 'GET'
-      }
+        method: 'GET',
+      },
     }
-    expect(ActionCreators.getMovieFromId(movieId)).toEqual(expectedAction);
+    expect(ActionCreators.getMovieFromId(movieId)).toEqual(expectedAction)
   })
 })
 
@@ -122,10 +126,10 @@ describe('Action creators for LOGIN', () => {
         endpoint: '/login',
         method: 'POST',
         data: {
-          code: code
-        }
-      }
+          code: code,
+        },
+      },
     }
-    expect(ActionCreators.login(code)).toEqual(expectedAction);
+    expect(ActionCreators.login(code)).toEqual(expectedAction)
   })
 })
