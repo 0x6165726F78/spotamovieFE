@@ -34,6 +34,7 @@ const store = createStore(
 persistStore(store, {
   storage: AsyncStorage,
   whitelist: ['user', 'moviesCached', 'moviesLiked', 'moviesDisliked'],
+  debounce: 10000,
 })
 // persistStore(store, { storage: AsyncStorage, whitelist: ['user'] }).purge() // DELETE PERSISTED STATE
 
