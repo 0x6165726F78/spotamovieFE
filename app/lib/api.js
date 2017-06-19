@@ -65,7 +65,6 @@ export default (symbol, baseURL, endpointSuffix = '') => {
 
     const actionWith = data => {
       const finalAction = Object.assign({}, action, data)
-      // delete finalAction[symbol]
       return finalAction
     }
 

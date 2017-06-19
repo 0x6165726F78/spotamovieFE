@@ -25,7 +25,6 @@ export default class LoadingView extends Component {
 const styles = StyleSheet.create({
   titleView: {
     flex: 0.1,
-    // backgroundColor: 'pink',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    // backgroundColor: 'purple',
     color: 'white',
     marginBottom: 10,
   },

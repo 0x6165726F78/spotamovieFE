@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   container: {
@@ -6,18 +6,17 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   containerLoader: {
     backgroundColor: '#23222E',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   titleView: {
     flex: 0.1,
-    // backgroundColor: 'pink',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,7 +28,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    // backgroundColor: 'purple',
     color: 'white',
     marginBottom: 10,
   },
@@ -42,7 +40,7 @@ export default StyleSheet.create({
     top: 0,
   },
   containerWelcome: {
-    marginTop: 80
+    marginTop: 80,
   },
   welcome: {
     color: 'white',
@@ -60,7 +58,7 @@ export default StyleSheet.create({
     color: 'white',
     fontFamily: 'Raleway-Medium',
     fontSize: 16,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   containerInstructions: {
     justifyContent: 'center',
@@ -71,7 +69,7 @@ export default StyleSheet.create({
     color: 'grey',
     fontFamily: 'Raleway-Medium',
     fontSize: 12,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   startContainer: {
     marginBottom: 60,
@@ -91,14 +89,14 @@ export default StyleSheet.create({
   startText: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 16
+    fontSize: 16,
   },
   loginButtonContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   spotifyIcon: {
     width: 20,
     height: 20,
-    marginRight: 5
-  }
-});
+    marginRight: 5,
+  },
+})

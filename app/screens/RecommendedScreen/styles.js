@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
   },
   titleView: {
     flex: 0.1,
-    // backgroundColor: 'pink',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -22,13 +21,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    // backgroundColor: 'purple',
     color: 'white',
     marginBottom: 10,
   },
   posterView: {
     flex: 1,
-    // backgroundColor:'cyan',
     paddingRight: 60,
     paddingLeft: 60,
     alignItems: 'center',
@@ -56,14 +53,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 40,
     width: 230,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   containerLoader: {
     backgroundColor: '#23222E',
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   modal1: {
     flex: 1,
@@ -79,7 +76,7 @@ export const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
-});
+})
 
 export const buttonStyle = StyleSheet.create({
   start: {
@@ -88,11 +85,11 @@ export const buttonStyle = StyleSheet.create({
     backgroundColor: '#23222E',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: '#fff'
+    borderColor: '#fff',
   },
   startText: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 16
-  }
-});
+    fontSize: 16,
+  },
+})

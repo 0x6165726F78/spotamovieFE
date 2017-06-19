@@ -2,7 +2,7 @@ import types from '../actions/types'
 const { ON_VALUE_CHANGE } = types
 
 const INITIAL_STATE = {
-  value: 'Liked', // Liked || Disliked
+  value: 'Liked',
 }
 
 export default (state = INITIAL_STATE, action) => {
