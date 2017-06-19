@@ -79,12 +79,12 @@ export default class DiscoverScreen extends Component {
     // this.setState({ cardIndex: this.state.cardIndex + 1 })
     const movieId = this.props.movies[this.state.cardIndex].id
     this.setState({ cardIndex: this.state.cardIndex + 1 })
-    this.props.likeMovie(movieId)
+    this.props.likeMovie(String(id))
   }
 
   handleNope = ({ id }) => {
     console.log('dislike', id)
-    this.props.dislikeMovie(id)
+    this.props.dislikeMovie(String(id))
     this.setState({ cardIndex: this.state.cardIndex + 1 })
   }
 
@@ -97,7 +97,7 @@ export default class DiscoverScreen extends Component {
   clickLike = () => {
     const { id } = this.props.movies[this.state.cardIndex]
     console.log('like', id)
-    this.props.likeMovie(id)
+    this.props.likeMovie(String(id))
     this._swiper._goToNextCard()
     this.setState({ cardIndex: this.state.cardIndex + 1 })
   }
@@ -105,7 +105,7 @@ export default class DiscoverScreen extends Component {
   clickDislike = () => {
     const { id } = this.props.movies[this.state.cardIndex]
     console.log('dislike', id)
-    this.props.dislikeMovie(id)
+    this.props.dislikeMovie(String(id))
     this._swiper._goToNextCard()
     this.setState({ cardIndex: this.state.cardIndex + 1 })
   }

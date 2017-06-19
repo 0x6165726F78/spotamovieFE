@@ -21,6 +21,10 @@ export default (state = [], action) => {
       return state
 
     case GET_MOVIE_SUCCESS:
+      if (action.list) {
+        return state
+      }
+
       if (action.response) {
         const movie = action.response
         if (state.find(movie => movie.id === action.response.id)) {
