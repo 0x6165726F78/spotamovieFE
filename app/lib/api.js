@@ -1,38 +1,45 @@
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
 
-export default (symbol, baseURL, endpointSuffix="") => {
-  const callApi = (serverRoute, endpoint, method='GET', data, authentication) => {
+export default (symbol, baseURL, endpointSuffix = '') => {
+  const callApi = (
+    serverRoute,
+    endpoint,
+    method = 'GET',
+    data,
+    authentication
+  ) => {
     const fullUrl = baseURL + endpoint + endpointSuffix
 
-  let body
+    let body
     if (data) {
       body = JSON.stringify(data)
     }
-    let ok ;
+    let ok
     return fetch(fullUrl, {
       method,
       body,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': authentication
-      }
+        Authorization: baseURL === 'http://localhost:3000'
+          ? authentication
+          : null,
+      },
     })
-      .then(response =>{
-        ok=response.ok;
-          return  response.json()
-            .then(json => {
-              if (!response.ok) {
-                return Promise.reject(json)
-              }
-              return json
-            })
+      .then(response => {
+        ok = response.ok
+        return response.json().then(json => {
+          if (!response.ok) {
+            return Promise.reject(json)
+          }
+          return json
+        })
       })
       .catch(err => {
         if (ok) {
-          return {};
+          return {}
         }
-        console.error('ERROR in fetch', err);
+        console.error('ERROR in fetch', err)
         return Promise.reject(err)
       })
   }
@@ -65,23 +72,24 @@ export default (symbol, baseURL, endpointSuffix="") => {
     next(actionWith({ type: type + '_REQUEST' }))
 
     return callApi(serverRoute, endpoint, method, data, authentication)
-      .then(
-        response => {
-          next(actionWith({
-          response,
-          type: type + '_SUCCESS'
-        }))
+      .then(response => {
+        next(
+          actionWith({
+            response,
+            type: type + '_SUCCESS',
+          })
+        )
         if (action.success) {
           store.dispatch(action.success())
-
         }
-      }
-      )
-      .catch(
-        error => next(actionWith({
-          type: type + '_FAILURE',
-          error: error.message || 'Something bad happened'
-        }))
+      })
+      .catch(error =>
+        next(
+          actionWith({
+            type: type + '_FAILURE',
+            error: error.message || 'Something bad happened',
+          })
+        )
       )
   }
 }
