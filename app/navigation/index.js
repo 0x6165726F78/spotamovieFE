@@ -1,17 +1,19 @@
-import LoginScreen from '../screens/LoginScreen';
-import DiscoverScreen from '../screens/DiscoverScreen';
-import LikedListScreen from '../screens/LikedListScreen';
-import WizardScreen from '../screens/WizardScreen';
-import SurveyScreen from '../screens/SurveyScreen';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
-import colors from '../colors';
+import {
+  LikedListScreen,
+  LoginScreen,
+  SuggestionsScreen,
+  WizardScreen,
+  SurveyScreen,
+} from '~/screens';
+import colors from '~/colors';
 
-const TAB_BAR_INITAL_ROUTE = 'SwiperEL';
+const TAB_BAR_INITAL_ROUTE = 'Suggestions';
 const STACK_INITIAL_ROUTE = 'Login';
 
 const TabBar = new TabNavigator(
   {
-    SwiperEL: { screen: DiscoverScreen },
+    Suggestions: { screen: SuggestionsScreen },
     LikedList: { screen: LikedListScreen },
   },
   {
@@ -41,8 +43,8 @@ export default new StackNavigator(
   {
     Login: { screen: LoginScreen },
     Survey: { screen: SurveyScreen },
-    Main: { screen: TabBar },
     Wizard: { screen: WizardScreen },
+    Main: { screen: TabBar },
   },
   {
     initialRouteName: STACK_INITIAL_ROUTE,
