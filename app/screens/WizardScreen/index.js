@@ -1,22 +1,22 @@
-import React, { Component, PropTypes } from 'react'
-import { styles } from './styles'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React, { Component, PropTypes } from 'react';
+import { styles } from './styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
   View,
   Text,
   TouchableHighlight,
   TouchableOpacity,
-} from 'react-native'
+} from 'react-native';
 
 const arrowIcon = (
   <Icon name="md-arrow-round-forward" size={30} color="white" height={20} />
-)
+);
 
 class Wizard extends Component {
   static navigationOptions = {
     header: null,
-  }
+  };
 
   render() {
     return (
@@ -45,8 +45,8 @@ class Wizard extends Component {
 
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
 
-export default Wizard
+export default Wizard;

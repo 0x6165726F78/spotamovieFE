@@ -1,8 +1,8 @@
 function defineActionTypes(types) {
   return types.reduce((types, typeName) => {
-    types[typeName] = typeName
-    return types
-  }, {})
+    types[typeName] = typeName;
+    return types;
+  }, {});
 }
 
 export default defineActionTypes([
@@ -50,4 +50,4 @@ export default defineActionTypes([
   'SKIP_MOVIE',
   'RESET_MOVIES',
   'ON_VALUE_CHANGE',
-])
+]);

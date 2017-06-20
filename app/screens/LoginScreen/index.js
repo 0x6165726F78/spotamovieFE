@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import base64 from 'base-64'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { login, logout, loading } from '../../actions'
-import config from '../../../config'
-import querystring from 'querystring'
-import { Buffer } from 'buffer'
-import styles from './styles'
-import { Spinner } from 'nachos-ui'
+import React, { Component } from 'react';
+import base64 from 'base-64';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { login, logout, loading } from '../../actions';
+import config from '../../../config';
+import querystring from 'querystring';
+import { Buffer } from 'buffer';
+import styles from './styles';
+import { Spinner } from 'nachos-ui';
 
 import {
   Animated,
@@ -21,21 +21,21 @@ import {
   Button,
   Image,
   StatusBar,
-} from 'react-native'
+} from 'react-native';
 
 const generateRandomString = function(length) {
-  var text = ''
+  var text = '';
   var possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
   for (let i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length))
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
-  return text
-}
+  return text;
+};
 
-const scope = 'user-read-private user-read-email playlist-read-private'
-const state = generateRandomString(16)
+const scope = 'user-read-private user-read-email playlist-read-private';
+const state = generateRandomString(16);
 const query =
   'https://accounts.spotify.com/authorize?' +
   querystring.stringify({
@@ -44,45 +44,45 @@ const query =
     scope: scope,
     redirect_uri: config.redirect_uri,
     state: state,
-  })
+  });
 function spotifyOauth() {
-  Linking.openURL(query)
+  Linking.openURL(query);
 }
 
 class LoginScreen extends Component {
   static navigationOptions = {
     header: null,
-  }
+  };
 
   componentWillMount() {
-    console.log('loooogin', this.props)
+    console.log('loooogin', this.props);
   }
 
   handleOpenSpotifyURL(event) {
-    let code = event.url.match(/code=(.+)\&/)
-    code = code[1]
-    this.props.login(code)
+    let code = event.url.match(/code=(.+)\&/);
+    code = code[1];
+    this.props.login(code);
   }
 
   handleGreeting() {
     if (this.props.user.name !== undefined) {
       return (
         <Text style={styles.startText}>Welcome {this.props.user.name}</Text>
-      )
+      );
     } else {
-      return <Text style={styles.startText}>Welcome</Text>
+      return <Text style={styles.startText}>Welcome</Text>;
     }
   }
 
   handleLogin() {
-    this.props.loading()
-    spotifyOauth()
-    Linking.addEventListener('url', this.handleOpenSpotifyURL.bind(this))
+    this.props.loading();
+    spotifyOauth();
+    Linking.addEventListener('url', this.handleOpenSpotifyURL.bind(this));
   }
 
   handleLogout() {
-    this.props.logout()
-    this.setState({ userLogged: false })
+    this.props.logout();
+    this.setState({ userLogged: false });
   }
 
   renderLoginScreen() {
@@ -120,15 +120,15 @@ class LoginScreen extends Component {
         </View>
         <StatusBar hidden />
       </View>
-    )
+    );
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.userToken) {
       if (nextProps.user.firstLogin) {
-        this.props.navigation.navigate('Wizard')
+        this.props.navigation.navigate('Wizard');
       } else {
-        this.props.navigation.navigate('SwiperEL')
+        this.props.navigation.navigate('SwiperEL');
       }
     }
   }
@@ -145,9 +145,9 @@ class LoginScreen extends Component {
           </View>
           <StatusBar hidden={false} barStyle="light-content" />
         </View>
-      )
+      );
     } else {
-      return this.renderLoginScreen()
+      return this.renderLoginScreen();
     }
   }
 }
@@ -156,11 +156,11 @@ const mapDispatchToProps = dispatch => ({
   loading: () => dispatch(loading()),
   login: code => dispatch(login(code)),
   logout: () => dispatch(logout()),
-})
+});
 
 const mapStateToProps = state => ({
   navigationState: state.navigationState,
   user: state.user,
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

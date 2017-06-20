@@ -1,4 +1,4 @@
-import * as ActionCreators from '../app/actions'
+import * as ActionCreators from '../app/actions';
 
 describe('Action creators for SpotifySymbol', () => {
   it('getMovieRecommendation', () => {
@@ -8,9 +8,9 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/recommendation`,
         method: 'GET',
       },
-    }
-    expect(ActionCreators.getMovieRecommendation()).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.getMovieRecommendation()).toEqual(expectedAction);
+  });
   it('getMoviesSurvey', () => {
     const expectedAction = {
       type: 'GET_MOVIES_SURVEY',
@@ -18,9 +18,9 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/survey`,
         method: 'GET',
       },
-    }
-    expect(ActionCreators.getMoviesSurvey()).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.getMoviesSurvey()).toEqual(expectedAction);
+  });
   it('getMoviesLiked', () => {
     const expectedAction = {
       type: 'GET_MOVIES_LIKED',
@@ -28,9 +28,9 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/liked`,
         method: 'GET',
       },
-    }
-    expect(ActionCreators.getMoviesLiked()).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.getMoviesLiked()).toEqual(expectedAction);
+  });
   it('getMoviesDisliked', () => {
     const expectedAction = {
       type: 'GET_MOVIES_DISLIKED',
@@ -38,11 +38,11 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/disliked`,
         method: 'GET',
       },
-    }
-    expect(ActionCreators.getMoviesDisliked()).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.getMoviesDisliked()).toEqual(expectedAction);
+  });
   it('dislikeMovie', () => {
-    const movieId = '11'
+    const movieId = '11';
     const expectedAction = {
       type: 'DISLIKE_MOVIE',
       movieId,
@@ -50,11 +50,11 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/${movieId}/dislike`,
         method: 'POST',
       },
-    }
-    expect(ActionCreators.dislikeMovie(movieId)).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.dislikeMovie(movieId)).toEqual(expectedAction);
+  });
   it('likeMovie', () => {
-    const movieId = '11'
+    const movieId = '11';
     const expectedAction = {
       type: 'LIKE_MOVIE',
       movieId,
@@ -62,11 +62,11 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/${movieId}/like`,
         method: 'POST',
       },
-    }
-    expect(ActionCreators.likeMovie(movieId)).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.likeMovie(movieId)).toEqual(expectedAction);
+  });
   it('unLikeMovie', () => {
-    const movieId = '11'
+    const movieId = '11';
     const expectedAction = {
       type: 'UNLIKE_MOVIE',
       movieId,
@@ -74,11 +74,11 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/${movieId}/unlike`,
         method: 'POST',
       },
-    }
-    expect(ActionCreators.unLikeMovie(movieId)).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.unLikeMovie(movieId)).toEqual(expectedAction);
+  });
   it('unDislikeMovie', () => {
-    const movieId = '11'
+    const movieId = '11';
     const expectedAction = {
       type: 'UNDISLIKE_MOVIE',
       movieId,
@@ -86,10 +86,10 @@ describe('Action creators for SpotifySymbol', () => {
         endpoint: `/movies/${movieId}/undislike`,
         method: 'POST',
       },
-    }
-    expect(ActionCreators.unDislikeMovie(movieId)).toEqual(expectedAction)
-  })
-})
+    };
+    expect(ActionCreators.unDislikeMovie(movieId)).toEqual(expectedAction);
+  });
+});
 
 describe('Action creators for TMDB', () => {
   it('getMoviesDiscover', () => {
@@ -99,12 +99,12 @@ describe('Action creators for TMDB', () => {
         endpoint: '/discover/movie',
         method: 'GET',
       },
-    }
-    expect(ActionCreators.getMoviesDiscover()).toEqual(expectedAction)
-  })
+    };
+    expect(ActionCreators.getMoviesDiscover()).toEqual(expectedAction);
+  });
   it('getMovieFromId', () => {
-    const movieId = '11'
-    const list = false
+    const movieId = '11';
+    const list = false;
     const expectedAction = {
       type: 'GET_MOVIE',
       list,
@@ -112,14 +112,14 @@ describe('Action creators for TMDB', () => {
         endpoint: `/movie/${movieId}`,
         method: 'GET',
       },
-    }
-    expect(ActionCreators.getMovieFromId(movieId)).toEqual(expectedAction)
-  })
-})
+    };
+    expect(ActionCreators.getMovieFromId(movieId)).toEqual(expectedAction);
+  });
+});
 
 describe('Action creators for LOGIN', () => {
   it('login', () => {
-    const code = 'fjdslfjsf9344282'
+    const code = 'fjdslfjsf9344282';
     const expectedAction = {
       type: 'LOGIN',
       [ActionCreators.SpotifySymbol]: {
@@ -129,7 +129,7 @@ describe('Action creators for LOGIN', () => {
           code: code,
         },
       },
-    }
-    expect(ActionCreators.login(code)).toEqual(expectedAction)
-  })
-})
+    };
+    expect(ActionCreators.login(code)).toEqual(expectedAction);
+  });
+});

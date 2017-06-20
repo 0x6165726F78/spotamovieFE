@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: 'rgba(0,0,0,0.8)',
   },
-})
+});
 
 export const buttonStyle = StyleSheet.create({
   start: {
@@ -62,4 +62,4 @@ export const buttonStyle = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
   },
-})
+});

@@ -1,6 +1,6 @@
-export const SpotifySymbol = 'apiSpotifySymbol'
-export const TMDBSymbol = 'apiTMDBSymbol'
-import types from './types'
+export const SpotifySymbol = 'apiSpotifySymbol';
+export const TMDBSymbol = 'apiTMDBSymbol';
+import types from './types';
 const {
   GET_MOVIES_DISCOVER,
   GET_MOVIE,
@@ -18,7 +18,7 @@ const {
   LOGOUT,
   LOGIN,
   ON_VALUE_CHANGE,
-} = types
+} = types;
 
 export const getMoviesDiscover = () => ({
   type: GET_MOVIES_DISCOVER,
@@ -26,7 +26,7 @@ export const getMoviesDiscover = () => ({
     endpoint: '/discover/movie',
     method: 'GET',
   },
-})
+});
 
 export const getMovieFromId = (movieId, list = false) => ({
   type: GET_MOVIE,
@@ -35,7 +35,7 @@ export const getMovieFromId = (movieId, list = false) => ({
     method: 'GET',
   },
   list,
-})
+});
 
 export const getMovieRecommendation = () => ({
   type: GET_MOVIE_RECOMMENDATION,
@@ -43,7 +43,7 @@ export const getMovieRecommendation = () => ({
     endpoint: `/movies/recommendation`,
     method: 'GET',
   },
-})
+});
 
 export const getMoviesSurvey = () => ({
   type: GET_MOVIES_SURVEY,
@@ -51,7 +51,7 @@ export const getMoviesSurvey = () => ({
     endpoint: `/movies/survey`,
     method: 'GET',
   },
-})
+});
 
 export const getMoviesLiked = () => ({
   type: GET_MOVIES_LIKED,
@@ -59,7 +59,7 @@ export const getMoviesLiked = () => ({
     endpoint: `/movies/liked`,
     method: 'GET',
   },
-})
+});
 
 export const getMoviesDisliked = () => ({
   type: GET_MOVIES_DISLIKED,
@@ -67,7 +67,7 @@ export const getMoviesDisliked = () => ({
     endpoint: `/movies/disliked`,
     method: 'GET',
   },
-})
+});
 
 export const dislikeMovie = movieId => ({
   type: DISLIKE_MOVIE,
@@ -76,11 +76,11 @@ export const dislikeMovie = movieId => ({
     method: 'POST',
   },
   movieId,
-})
+});
 
 export const skipMovie = movieId => ({
   type: SKIP_MOVIE,
-})
+});
 
 export const likeMovie = movieId => ({
   type: LIKE_MOVIE,
@@ -89,7 +89,7 @@ export const likeMovie = movieId => ({
     method: 'POST',
   },
   movieId,
-})
+});
 
 export const unLikeMovie = movieId => ({
   type: UNLIKE_MOVIE,
@@ -98,7 +98,7 @@ export const unLikeMovie = movieId => ({
     method: 'POST',
   },
   movieId,
-})
+});
 
 export const unDislikeMovie = movieId => ({
   type: UNDISLIKE_MOVIE,
@@ -107,19 +107,19 @@ export const unDislikeMovie = movieId => ({
     method: 'POST',
   },
   movieId,
-})
+});
 
 export const resetMovies = () => ({
   type: RESET_MOVIES,
-})
+});
 
 export const loading = () => ({
   type: LOADING,
-})
+});
 
 export const logout = () => ({
   type: LOGOUT,
-})
+});
 
 export const login = code => ({
   type: LOGIN,
@@ -130,9 +130,9 @@ export const login = code => ({
       code: code,
     },
   },
-})
+});
 
 export const onValueChange = value => ({
   type: ON_VALUE_CHANGE,
   value,
-})
+});

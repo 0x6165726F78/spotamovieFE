@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -7,34 +7,34 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Modal,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import SwipeCards from 'react-native-swipe-cards'
-import * as ActionCreators from '../../actions'
-import { connect } from 'react-redux'
-import { styles } from './styles'
-import { Spinner, Button, themeManager } from 'nachos-ui'
-import { ButtonsGroup, Card, NoMoreCard } from './components'
-import LoadingView from '../../components/LoadingView'
-import MovieCard from '../../components/MovieCard'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import SwipeCards from 'react-native-swipe-cards';
+import * as ActionCreators from '../../actions';
+import { connect } from 'react-redux';
+import { styles } from './styles';
+import { Spinner, Button, themeManager } from 'nachos-ui';
+import { ButtonsGroup, Card, NoMoreCard } from './components';
+import LoadingView from '../../components/LoadingView';
+import MovieCard from '../../components/MovieCard';
 
-const iconHeart = <Icon name="md-heart" size={40} color="white" />
-const iconClose = <Icon name="md-close" size={40} color="white" />
+const iconHeart = <Icon name="md-heart" size={40} color="white" />;
+const iconClose = <Icon name="md-close" size={40} color="white" />;
 
-const buttonTheme = themeManager.getStyle('Button')
+const buttonTheme = themeManager.getStyle('Button');
 const transparentButtonStyle = {
   ...buttonTheme,
   BUTTON_STATE_PRIMARY: 'transparent',
-}
+};
 
-btnStyle = { margin: 5 }
+btnStyle = { margin: 5 };
 
 @connect(data => SurveyScreen.getData, ActionCreators)
 export default class SurveyScreen extends Component {
   state = {
     cardIndex: 0,
     modalVisible: false,
-  }
+  };
 
   static navigationOptions = {
     title: 'SURVEY',
@@ -49,70 +49,70 @@ export default class SurveyScreen extends Component {
         size={32}
       />,
     tabBarLabel: 'Discover',
-  }
-  static getData = ({ movies, moviesSurvey }) => ({ movies, moviesSurvey })
+  };
+  static getData = ({ movies, moviesSurvey }) => ({ movies, moviesSurvey });
 
   componentDidMount() {
-    this.props.getMoviesSurvey()
+    this.props.getMoviesSurvey();
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.moviesSurvey !== nextProps.moviesSurvey) {
       nextProps.moviesSurvey.map(movieId => {
-        this.props.getMovieFromId(movieId)
-      })
+        this.props.getMovieFromId(movieId);
+      });
     }
   }
 
   _renderLoadingIndicator = () => {
-    return <LoadingView title="Loading Movies..." />
-  }
+    return <LoadingView title="Loading Movies..." />;
+  };
 
   handleYup = ({ id }) => {
     // console.log('like', id)
     // this.props.likeMovie(id)
     // this.setState({ cardIndex: this.state.cardIndex + 1 })
-    const movieId = this.props.movies[this.state.cardIndex].id
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-    this.props.likeMovie(String(id))
-  }
+    const movieId = this.props.movies[this.state.cardIndex].id;
+    this.setState({ cardIndex: this.state.cardIndex + 1 });
+    this.props.likeMovie(String(id));
+  };
 
   handleNope = ({ id }) => {
-    console.log('dislike', id)
-    this.props.dislikeMovie(String(id))
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
+    console.log('dislike', id);
+    this.props.dislikeMovie(String(id));
+    this.setState({ cardIndex: this.state.cardIndex + 1 });
+  };
 
   handleNoMore = () => {
-    this.props.getMoviesSurvey()
-    this.setState({ cardIndex: 0 })
-    this.props.resetMovies()
-    this.props.navigation.navigate('Main')
-  }
+    this.props.getMoviesSurvey();
+    this.setState({ cardIndex: 0 });
+    this.props.resetMovies();
+    this.props.navigation.navigate('Main');
+  };
 
   clickSkip = () => {
-    this._swiper._goToNextCard()
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
+    this._swiper._goToNextCard();
+    this.setState({ cardIndex: this.state.cardIndex + 1 });
+  };
 
   clickLike = () => {
-    const { id } = this.props.movies[this.state.cardIndex]
-    console.log('like', id)
-    this.props.likeMovie(String(id))
-    this._swiper._goToNextCard()
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
+    const { id } = this.props.movies[this.state.cardIndex];
+    console.log('like', id);
+    this.props.likeMovie(String(id));
+    this._swiper._goToNextCard();
+    this.setState({ cardIndex: this.state.cardIndex + 1 });
+  };
 
   clickDislike = () => {
-    const { id } = this.props.movies[this.state.cardIndex]
-    console.log('dislike', id)
-    this.props.dislikeMovie(String(id))
-    this._swiper._goToNextCard()
-    this.setState({ cardIndex: this.state.cardIndex + 1 })
-  }
+    const { id } = this.props.movies[this.state.cardIndex];
+    console.log('dislike', id);
+    this.props.dislikeMovie(String(id));
+    this._swiper._goToNextCard();
+    this.setState({ cardIndex: this.state.cardIndex + 1 });
+  };
   openModal = movie => {
-    this.setState({ modalVisible: true, movie })
-  }
+    this.setState({ modalVisible: true, movie });
+  };
 
   _renderMainScreen = () => {
     return (
@@ -183,20 +183,20 @@ export default class SurveyScreen extends Component {
         <StatusBar hidden={false} barStyle="light-content" />
 
       </View>
-    )
-  }
+    );
+  };
 
   closeModal = () => {
-    this.setState({ modalVisible: false })
-  }
+    this.setState({ modalVisible: false });
+  };
 
   render() {
-    const { movies, moviesSurvey } = this.props
+    const { movies, moviesSurvey } = this.props;
 
     if (!movies.length || movies.length < moviesSurvey.length) {
-      return this._renderLoadingIndicator()
+      return this._renderLoadingIndicator();
     }
 
-    return this._renderMainScreen()
+    return this._renderMainScreen();
   }
 }

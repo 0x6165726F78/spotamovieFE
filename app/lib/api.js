@@ -9,13 +9,13 @@ export default (symbol, baseURL, endpointSuffix = '') => {
     data,
     authentication
   ) => {
-    const fullUrl = baseURL + endpoint + endpointSuffix
+    const fullUrl = baseURL + endpoint + endpointSuffix;
 
-    let body
+    let body;
     if (data) {
-      body = JSON.stringify(data)
+      body = JSON.stringify(data);
     }
-    let ok
+    let ok;
     return fetch(fullUrl, {
       method,
       body,
@@ -27,48 +27,48 @@ export default (symbol, baseURL, endpointSuffix = '') => {
       },
     })
       .then(response => {
-        ok = response.ok
+        ok = response.ok;
         return response.json().then(json => {
           if (!response.ok) {
-            return Promise.reject(json)
+            return Promise.reject(json);
           }
-          return json
-        })
+          return json;
+        });
       })
       .catch(err => {
         if (ok) {
-          return {}
+          return {};
         }
-        console.error('ERROR in fetch', err)
-        return Promise.reject(err)
-      })
-  }
+        console.error('ERROR in fetch', err);
+        return Promise.reject(err);
+      });
+  };
 
   // Action key that carries API call info interpreted by this Redux middleware.
   return store => next => action => {
-    const callAPI = action[symbol]
+    const callAPI = action[symbol];
     if (typeof callAPI === 'undefined') {
-      return next(action)
+      return next(action);
     }
 
-    let { serverRoute, endpoint, method, data } = callAPI
-    const { type } = action
+    let { serverRoute, endpoint, method, data } = callAPI;
+    const { type } = action;
 
     if (typeof endpoint !== 'string') {
-      throw new Error('Specify a string endpoint URL.')
+      throw new Error('Specify a string endpoint URL.');
     }
 
-    let authentication
+    let authentication;
     if (store.getState().user.userToken) {
-      authentication = 'Bearer ' + store.getState().user.userToken
+      authentication = 'Bearer ' + store.getState().user.userToken;
     }
 
     const actionWith = data => {
-      const finalAction = Object.assign({}, action, data)
-      return finalAction
-    }
+      const finalAction = Object.assign({}, action, data);
+      return finalAction;
+    };
 
-    next(actionWith({ type: type + '_REQUEST' }))
+    next(actionWith({ type: type + '_REQUEST' }));
 
     return callApi(serverRoute, endpoint, method, data, authentication)
       .then(response => {
@@ -77,9 +77,9 @@ export default (symbol, baseURL, endpointSuffix = '') => {
             response,
             type: type + '_SUCCESS',
           })
-        )
+        );
         if (action.success) {
-          store.dispatch(action.success())
+          store.dispatch(action.success());
         }
       })
       .catch(error =>
@@ -89,6 +89,6 @@ export default (symbol, baseURL, endpointSuffix = '') => {
             error: error.message || 'Something bad happened',
           })
         )
-      )
-  }
-}
+      );
+  };
+};

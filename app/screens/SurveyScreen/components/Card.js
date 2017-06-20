@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
-const POSTER = 'https://image.tmdb.org/t/p/w500'
+const POSTER = 'https://image.tmdb.org/t/p/w500';
 
 const styles = {
   poster: {
@@ -26,7 +26,7 @@ const styles = {
     shadowColor: 'black',
     shadowOpacity: 0.8,
   },
-}
+};
 
 class Card extends Component {
   render() {
@@ -36,8 +36,8 @@ class Card extends Component {
         style={styles.posterCard}
         source={{ uri: `${POSTER}/${this.props.poster_path}` }}
       />
-    )
+    );
   }
 }
 
-export default Card
+export default Card;

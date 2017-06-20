@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -8,26 +8,26 @@ import {
   Modal,
   TouchableHighlight,
   TouchableOpacity,
-} from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
-import * as ActionCreators from '../../actions'
-import { connect } from 'react-redux'
-import MovieItem from './components/MovieItem'
-import MovieCard from '../../components/MovieCard'
-import { styles } from './styles'
-import Octicons from 'react-native-vector-icons/Octicons'
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import * as ActionCreators from '../../actions';
+import { connect } from 'react-redux';
+import MovieItem from './components/MovieItem';
+import MovieCard from '../../components/MovieCard';
+import { styles } from './styles';
+import Octicons from 'react-native-vector-icons/Octicons';
 
 const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
   <TouchableOpacity
     style={{ marginRight: 8 }}
     onPress={() => {
-      logout()
-      onPress()
+      logout();
+      onPress();
     }}
   >
     <Octicons name="sign-out" size={28} color="white" />
   </TouchableOpacity>
-)
+);
 
 @connect(data => LikedListScreen.getData, ActionCreators)
 export default class LikedListScreen extends Component {
@@ -44,9 +44,9 @@ export default class LikedListScreen extends Component {
         size={32}
       />,
     tabBarLabel: 'Liked',
-  })
+  });
 
-  filteredMovies = []
+  filteredMovies = [];
 
   static getData = (
     { moviesCached, moviesLiked, moviesDisliked, likedListScreen },
@@ -54,13 +54,13 @@ export default class LikedListScreen extends Component {
   ) => {
     const filteredMovies = Object.values(moviesCached).filter(val => {
       if (likedListScreen.value === 'Liked') {
-        return moviesLiked.includes(String(val.id))
+        return moviesLiked.includes(String(val.id));
       }
 
       if (likedListScreen.value === 'Disliked') {
-        return moviesDisliked.includes(String(val.id))
+        return moviesDisliked.includes(String(val.id));
       }
-    })
+    });
 
     return {
       likedListScreen,
@@ -68,8 +68,8 @@ export default class LikedListScreen extends Component {
       moviesCached,
       moviesLiked,
       moviesDisliked,
-    }
-  }
+    };
+  };
 
   state = {
     modalVisible: false,
@@ -81,41 +81,41 @@ export default class LikedListScreen extends Component {
     fetchedDisliked: false,
     filteredMovies: [],
     movie: null,
-  }
+  };
 
   _onChange = event => {
     if (this.state.value === 'Liked') {
       this.state.filteredMovies = Object.values(
         this.props.moviesCached
-      ).filter(val => this.props.moviesDisliked.includes(val.id.toString()))
+      ).filter(val => this.props.moviesDisliked.includes(val.id.toString()));
     }
     if (this.state.value === 'Disliked') {
       this.state.filteredMovies = Object.values(
         this.props.moviesCached
-      ).filter(val => this.props.moviesLiked.includes(val.id.toString()))
+      ).filter(val => this.props.moviesLiked.includes(val.id.toString()));
     }
 
     this.setState({
       selectedIndex: event.nativeEvent.selectedSegmentIndex,
       filteredMovies: this.state.filteredMovies,
-    })
-  }
+    });
+  };
 
   _onValueChange = value => {
-    this.props.onValueChange(value)
+    this.props.onValueChange(value);
 
     // this.setState({
     //   value: value,
     // })
-  }
+  };
 
   handleRemove = movieId => {
     if (this.props.likedListScreen.value === 'Liked') {
-      this.props.unLikeMovie(movieId)
+      this.props.unLikeMovie(movieId);
     } else if (this.props.likedListScreen.value === 'Disliked') {
-      this.props.unDislikeMovie(movieId)
+      this.props.unDislikeMovie(movieId);
     }
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (
@@ -123,9 +123,9 @@ export default class LikedListScreen extends Component {
       this.props.moviesLiked !== nextProps.moviesLiked
     ) {
       nextProps.moviesLiked.map(movieId => {
-        this.props.getMovieFromId(movieId, true)
-      })
-      this.setState({ fetchedLiked: true })
+        this.props.getMovieFromId(movieId, true);
+      });
+      this.setState({ fetchedLiked: true });
     }
 
     if (
@@ -133,9 +133,9 @@ export default class LikedListScreen extends Component {
       this.props.moviesDisliked !== nextProps.moviesDisliked
     ) {
       nextProps.moviesDisliked.map(movieId => {
-        this.props.getMovieFromId(movieId, true)
-      })
-      this.setState({ fetchedDisliked: true })
+        this.props.getMovieFromId(movieId, true);
+      });
+      this.setState({ fetchedDisliked: true });
     }
 
     if (
@@ -146,28 +146,28 @@ export default class LikedListScreen extends Component {
         this.props.moviesCached
       ).filter(val => {
         if (this.state.value === 'Liked')
-          return this.props.moviesLiked.includes(val.id.toString())
+          return this.props.moviesLiked.includes(val.id.toString());
         else {
-          return this.props.moviesDisliked.includes(val.id.toString())
+          return this.props.moviesDisliked.includes(val.id.toString());
         }
-      })
+      });
     }
 
-    this.setState({ filteredMovies: this.state.filteredMovies })
+    this.setState({ filteredMovies: this.state.filteredMovies });
   }
 
   componentDidMount() {
-    this.props.getMoviesLiked()
-    this.props.getMoviesDisliked()
+    this.props.getMoviesLiked();
+    this.props.getMoviesDisliked();
   }
 
   closeModal = () => {
-    this.setState({ modalVisible: false })
-  }
+    this.setState({ modalVisible: false });
+  };
 
   openModal = movie => {
-    this.setState({ modalVisible: true, movie })
-  }
+    this.setState({ modalVisible: true, movie });
+  };
 
   render() {
     return (
@@ -231,6 +231,6 @@ export default class LikedListScreen extends Component {
         </Modal>
 
       </View>
-    )
+    );
   }
 }

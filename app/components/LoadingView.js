@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, StatusBar } from 'react-native'
-import { Spinner } from 'nachos-ui'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import { Spinner } from 'nachos-ui';
 
 export default class LoadingView extends Component {
   static defaultProps = {
     title: 'LOADING SURVEY...',
-  }
+  };
 
   render() {
     return (
@@ -18,7 +18,7 @@ export default class LoadingView extends Component {
         </View>
         <StatusBar hidden={false} barStyle="light-content" />
       </View>
-    )
+    );
   }
 }
 
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 10,
   },
-})
+});

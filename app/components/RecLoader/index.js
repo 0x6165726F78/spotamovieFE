@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { styles } from './styles'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { Spinner } from 'nachos-ui'
+import React, { Component } from 'react';
+import { styles } from './styles';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { Spinner } from 'nachos-ui';
 
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
 const arrowIcon = (
   <Icon name="md-arrow-round-forward" size={30} color="white" height={20} />
-)
+);
 
 class RecLoader extends Component {
   render() {
@@ -25,8 +25,8 @@ class RecLoader extends Component {
           <Spinner color="#94de45" />
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default RecLoader
+export default RecLoader;

@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/Ionicons'
+import React, { Component } from 'react';
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const iconPulse = <Icon name="md-pulse" size={16} color="goldenrod" />
+const iconPulse = <Icon name="md-pulse" size={16} color="goldenrod" />;
 
-const POSTER = 'https://image.tmdb.org/t/p/w500'
+const POSTER = 'https://image.tmdb.org/t/p/w500';
 
 export default class MovieCard extends Component {
   render() {
-    const overview = this.props.movie.overview
-    const lengthOv = 312
+    const overview = this.props.movie.overview;
+    const lengthOv = 312;
     let trimmedOv = overview.length > lengthOv
       ? overview.substring(0, lengthOv) + '...'
-      : overview
+      : overview;
     return (
       <View style={styles.container}>
         <View style={styles.marginRow} />
@@ -52,7 +52,7 @@ export default class MovieCard extends Component {
 
         <View style={styles.marginRow} />
       </View>
-    )
+    );
   }
 }
 
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
   box3: {
     backgroundColor: '#254441',
   },
-})
+});

@@ -6,7 +6,8 @@
     "test": "jest",
     "test:watch": "npm test -- --watch",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "security-check": "nsp check"
+    "security-check": "nsp check",
+    "precommit": "lint-staged --verbose"
   },
   "dependencies": {
     "@exponent/vector-icons": "^4.0.0",
@@ -40,9 +41,12 @@
     "eslint": "^3.14.1",
     "eslint-plugin-react": "^6.9.0",
     "flow-bin": "^0.38.0",
+    "husky": "0.13.4",
     "jest": "20.0.4",
     "jest-fetch-mock": "^1.0.7",
+    "lint-staged": "4.0.0",
     "nsp": "2.6.3",
+    "prettier": "1.4.4",
     "react-test-renderer": "16.0.0-alpha.12",
     "remote-redux-devtools": "^0.5.7"
   },
@@ -50,6 +54,12 @@
     "preset": "react-native",
     "setupFiles": [
       "./jest/setup.js"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --print-width 80 --single-quote --trailing-comma es5 --write",
+      "git add"
     ]
   }
 }

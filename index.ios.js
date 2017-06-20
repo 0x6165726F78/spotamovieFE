@@ -1,19 +1,19 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import { composeWithDevTools } from 'remote-redux-devtools'
-import { persistStore, autoRehydrate } from 'redux-persist'
-import reducers from './app/reducers'
-import api from './app/lib/api.js'
-import { SpotifySymbol, TMDBSymbol } from './app/actions'
-import config from './config'
-import { AppRegistry, AsyncStorage } from 'react-native'
-import createLogger from 'redux-logger'
-import Router from './app/navigation'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { composeWithDevTools } from 'remote-redux-devtools';
+import { persistStore, autoRehydrate } from 'redux-persist';
+import reducers from './app/reducers';
+import api from './app/lib/api.js';
+import { SpotifySymbol, TMDBSymbol } from './app/actions';
+import config from './config';
+import { AppRegistry, AsyncStorage } from 'react-native';
+import createLogger from 'redux-logger';
+import Router from './app/navigation';
 
-console.ignoredYellowBox = ['Warning: View.propTypes']
+console.ignoredYellowBox = ['Warning: View.propTypes'];
 
-const composeEnhancers = composeWithDevTools({ realtime: true })
+const composeEnhancers = composeWithDevTools({ realtime: true });
 const store = createStore(
   reducers,
   composeEnhancers(
@@ -29,19 +29,19 @@ const store = createStore(
     ),
     autoRehydrate()
   )
-)
+);
 
 persistStore(store, {
   storage: AsyncStorage,
   whitelist: ['user', 'moviesCached', 'moviesLiked', 'moviesDisliked'],
   debounce: 10000,
-})
+});
 // persistStore(store, { storage: AsyncStorage, whitelist: ['user'] }).purge() // DELETE PERSISTED STATE
 
 const App = () =>
   <Provider store={store}>
     <Router />
-  </Provider>
+  </Provider>;
 
-export default App
-AppRegistry.registerComponent('spotamovieFE', () => App)
+export default App;
+AppRegistry.registerComponent('spotamovieFE', () => App);

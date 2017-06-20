@@ -1,13 +1,13 @@
-import LoginScreen from '../screens/LoginScreen'
-import DiscoverScreen from '../screens/DiscoverScreen'
-import LikedListScreen from '../screens/LikedListScreen'
-import WizardScreen from '../screens/WizardScreen'
-import SurveyScreen from '../screens/SurveyScreen'
-import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation'
-import colors from '../colors'
+import LoginScreen from '../screens/LoginScreen';
+import DiscoverScreen from '../screens/DiscoverScreen';
+import LikedListScreen from '../screens/LikedListScreen';
+import WizardScreen from '../screens/WizardScreen';
+import SurveyScreen from '../screens/SurveyScreen';
+import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';
+import colors from '../colors';
 
-const TAB_BAR_INITAL_ROUTE = 'SwiperEL'
-const STACK_INITIAL_ROUTE = 'Login'
+const TAB_BAR_INITAL_ROUTE = 'SwiperEL';
+const STACK_INITIAL_ROUTE = 'Login';
 
 const TabBar = new TabNavigator(
   {
@@ -35,7 +35,7 @@ const TabBar = new TabNavigator(
       },
     },
   }
-)
+);
 
 export default new StackNavigator(
   {
@@ -56,4 +56,4 @@ export default new StackNavigator(
       headerTintColor: 'white',
     },
   }
-)
+);

@@ -16,8 +16,8 @@ const styles = EStyleSheet.create({
     flex: 1,
     height: null,
     width: null,
-    borderRadius: 10
-  }
+    borderRadius: 10,
+  },
 });
 
 export default styles;

@@ -1,20 +1,20 @@
-import * as ActionCreators from '../app/actions'
-import reducer from '../app/reducers'
-import movies from '../app/reducers/moviesReducer'
-import moviesSurvey from '../app/reducers/moviesSurveyReducer'
-import moviesLiked from '../app/reducers/moviesLikedReducer'
-import moviesDisliked from '../app/reducers/moviesDislikedReducer'
-import movieRecomm from '../app/reducers/movieRecommReducer'
-import user from '../app/reducers/userReducer'
+import * as ActionCreators from '../app/actions';
+import reducer from '../app/reducers';
+import movies from '../app/reducers/moviesReducer';
+import moviesSurvey from '../app/reducers/moviesSurveyReducer';
+import moviesLiked from '../app/reducers/moviesLikedReducer';
+import moviesDisliked from '../app/reducers/moviesDislikedReducer';
+import movieRecomm from '../app/reducers/movieRecommReducer';
+import user from '../app/reducers/userReducer';
 
 const movieMock = {
   seen: false,
   poster_path: '/sjdfkjsiks.jpg',
   id: '1234',
   title: 'Lo que el viento se llevó',
-}
+};
 
-const movieIdMocks = [1212334, 42345345, 52455]
+const movieIdMocks = [1212334, 42345345, 52455];
 
 describe('Tests for reducer: movies', () => {
   it('should handle GET_MOVIES_DISCOVER when receiving movie object', () => {
@@ -25,8 +25,8 @@ describe('Tests for reducer: movies', () => {
           results: [movieMock],
         },
       })
-    ).toEqual([movieMock])
-  })
+    ).toEqual([movieMock]);
+  });
 
   it('should handle GET_MOVIE when receiving movie object', () => {
     expect(
@@ -34,8 +34,8 @@ describe('Tests for reducer: movies', () => {
         type: 'GET_MOVIE_SUCCESS',
         response: movieMock,
       })
-    ).toEqual([movieMock])
-  })
+    ).toEqual([movieMock]);
+  });
 
   it('should handle GET_MOVIE when the initial state is undefined', () => {
     expect(
@@ -43,8 +43,8 @@ describe('Tests for reducer: movies', () => {
         type: 'GET_MOVIE_SUCCESS',
         response: movieMock,
       })
-    ).toEqual([movieMock])
-  })
+    ).toEqual([movieMock]);
+  });
 
   it('should handle GET_MOVIE when type does not match', () => {
     expect(
@@ -52,8 +52,8 @@ describe('Tests for reducer: movies', () => {
         type: 'PEPITO_NO_EXISTE',
         response: movieMock,
       })
-    ).toEqual([movieMock])
-  })
+    ).toEqual([movieMock]);
+  });
 
   it('should update existing movies without creating a new record', () => {
     expect(
@@ -61,8 +61,8 @@ describe('Tests for reducer: movies', () => {
         type: 'GET_MOVIE_SUCCESS',
         response: Object.assign({}, movieMock, { title: 'Hoho' }),
       })
-    ).toEqual([Object.assign({}, movieMock, { title: 'Hoho' })])
-  })
+    ).toEqual([Object.assign({}, movieMock, { title: 'Hoho' })]);
+  });
 
   it('should handle RESET_MOVIES returning an empty array', () => {
     expect(
@@ -70,9 +70,9 @@ describe('Tests for reducer: movies', () => {
         type: 'RESET_MOVIES',
         response: movieMock,
       })
-    ).toEqual([])
-  })
-})
+    ).toEqual([]);
+  });
+});
 
 describe('Tests for reducer: moviesSurvey', () => {
   it('should handle GET_MOVIES_SURVEY when receiving movie object', () => {
@@ -83,9 +83,9 @@ describe('Tests for reducer: moviesSurvey', () => {
           movies: [movieIdMocks],
         },
       })
-    ).toEqual([movieIdMocks])
-  })
-})
+    ).toEqual([movieIdMocks]);
+  });
+});
 
 describe('Tests for reducer: moviesLiked - moviesDisliked', () => {
   it('should handle GET_MOVIES_LIKED when receiving movie object', () => {
@@ -96,8 +96,8 @@ describe('Tests for reducer: moviesLiked - moviesDisliked', () => {
           movies: [movieIdMocks],
         },
       })
-    ).toEqual([movieIdMocks])
-  })
+    ).toEqual([movieIdMocks]);
+  });
 
   it('should handle GET_MOVIES_DISLIKED when receiving movie object', () => {
     expect(
@@ -107,9 +107,9 @@ describe('Tests for reducer: moviesLiked - moviesDisliked', () => {
           movies: [movieIdMocks],
         },
       })
-    ).toEqual([movieIdMocks])
-  })
-})
+    ).toEqual([movieIdMocks]);
+  });
+});
 
 describe('Tests for reducer: movieRecomm', () => {
   it('should handle GET_MOVIE_RECOMMENDATION when receiving a movieId', () => {
@@ -120,9 +120,9 @@ describe('Tests for reducer: movieRecomm', () => {
           movies: movieIdMocks,
         },
       })
-    ).toEqual(movieIdMocks)
-  })
-})
+    ).toEqual(movieIdMocks);
+  });
+});
 
 describe('Tests for reducer: user', () => {
   it('should handle LOADING for state loading true', () => {
@@ -134,8 +134,8 @@ describe('Tests for reducer: user', () => {
           response: { loading: true },
         }
       )
-    ).toEqual({ loading: true })
-  })
+    ).toEqual({ loading: true });
+  });
   it('should handle LOGIN when code is sent', () => {
     expect(
       user(
@@ -149,6 +149,6 @@ describe('Tests for reducer: user', () => {
       )
     ).toEqual({
       name: 'Arol',
-    })
-  })
-})
+    });
+  });
+});

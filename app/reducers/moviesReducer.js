@@ -1,56 +1,56 @@
-import types from '../actions/types'
+import types from '../actions/types';
 const {
   GET_MOVIES_DISCOVER_SUCCESS,
   GET_MOVIES_DISCOVER_ERROR,
   GET_MOVIE_SUCCESS,
   RESET_MOVIES,
   GET_MOVIE_ERROR,
-} = types
+} = types;
 
 export default (state = [], action) => {
   switch (action.type) {
     case GET_MOVIES_DISCOVER_SUCCESS:
       if (action.response.results) {
-        let parsedMovies = parseMovies(action.response.results)
-        return parsedMovies
+        let parsedMovies = parseMovies(action.response.results);
+        return parsedMovies;
       }
-      return state
+      return state;
 
     case GET_MOVIES_DISCOVER_ERROR:
-      console.log('ERROR IN REDUCERS:', action.error)
-      return state
+      console.log('ERROR IN REDUCERS:', action.error);
+      return state;
 
     case GET_MOVIE_SUCCESS:
       if (action.list) {
-        return state
+        return state;
       }
 
       if (action.response) {
-        const movie = action.response
+        const movie = action.response;
         if (state.find(movie => movie.id === action.response.id)) {
           return state.map(movie => {
             if (movie.id === action.response.id) {
-              return parseMovie(action.response)
+              return parseMovie(action.response);
             }
-            return movie
-          })
+            return movie;
+          });
         }
-        return [...state, parseMovie(action.response)]
+        return [...state, parseMovie(action.response)];
       }
-      return state
+      return state;
 
     case RESET_MOVIES:
-      console.log('Reset Movies Reducer')
-      return []
+      console.log('Reset Movies Reducer');
+      return [];
 
     case GET_MOVIE_ERROR:
-      console.log('ERROR IN REDUCERS:', action.error)
-      return state
+      console.log('ERROR IN REDUCERS:', action.error);
+      return state;
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 function parseMovie(data) {
   return {
@@ -63,15 +63,15 @@ function parseMovie(data) {
     genres: data.genres,
     releaseDate: data.release_date,
     backdropPath: data.backdrop_path,
-  }
+  };
 }
 
 function parseMovies(moviesArray) {
-  return moviesArray.map(movie => parseMovie(movie))
+  return moviesArray.map(movie => parseMovie(movie));
 }
 
 function parseMoviesSurvey(moviesArray) {
   return moviesArray.map(movie => ({
     movieSurveyId: movie,
-  }))
+  }));
 }
