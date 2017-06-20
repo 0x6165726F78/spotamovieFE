@@ -6,4 +6,7 @@ export default {
   darkBlackColor: '#212121',
   greenColor: '#39CA74',
   darkGrayColor: '#929292',
+  backgroundColor: '#23222E',
+  lightGreenColor: '#94de45',
+  darkGreenColor: '#62C654',
 };
