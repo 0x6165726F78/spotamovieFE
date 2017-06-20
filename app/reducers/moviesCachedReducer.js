@@ -1,15 +1,15 @@
 import { REHYDRATE } from 'redux-persist/constants';
-import types from '../actions/types';
+import types from '~/actions/types';
 const { GET_MOVIE_SUCCESS } = types;
 
-export default (state = {}, action) => {
-  switch (action.type) {
+export default (state = {}, { type, response, payload }) => {
+  switch (type) {
     case REHYDRATE:
-      return action.payload.moviesCached || {};
+      return payload.moviesCached || {};
+
     case GET_MOVIE_SUCCESS:
-      return Object.assign({}, state, {
-        [action.response.id]: action.response,
-      });
+      return { ...state, [response.id]: response };
+
     default:
       return state;
   }
