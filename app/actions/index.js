@@ -1,15 +1,12 @@
-export const SpotifySymbol = 'apiSpotifySymbol';
-export const TMDBSymbol = 'apiTMDBSymbol';
+import { SpotifySymbol, TMDBSymbol } from '~/lib/apiMiddleware.js';
 import types from './types';
 const {
-  GET_MOVIES_DISCOVER,
   GET_MOVIE,
-  GET_MOVIE_RECOMMENDATION,
+  GET_MOVIES_RECOMMENDATION,
   GET_MOVIES_SURVEY,
   GET_MOVIES_LIKED,
   GET_MOVIES_DISLIKED,
   DISLIKE_MOVIE,
-  SKIP_MOVIE,
   LIKE_MOVIE,
   UNLIKE_MOVIE,
   UNDISLIKE_MOVIE,
@@ -20,14 +17,6 @@ const {
   ON_VALUE_CHANGE,
 } = types;
 
-export const getMoviesDiscover = () => ({
-  type: GET_MOVIES_DISCOVER,
-  [TMDBSymbol]: {
-    endpoint: '/discover/movie',
-    method: 'GET',
-  },
-});
-
 export const getMovieFromId = (movieId, list = false) => ({
   type: GET_MOVIE,
   [TMDBSymbol]: {
@@ -37,8 +26,8 @@ export const getMovieFromId = (movieId, list = false) => ({
   list,
 });
 
-export const getMovieRecommendation = () => ({
-  type: GET_MOVIE_RECOMMENDATION,
+export const getMoviesRecommendation = () => ({
+  type: GET_MOVIES_RECOMMENDATION,
   [SpotifySymbol]: {
     endpoint: `/movies/recommendation`,
     method: 'GET',
@@ -76,10 +65,6 @@ export const dislikeMovie = movieId => ({
     method: 'POST',
   },
   movieId,
-});
-
-export const skipMovie = movieId => ({
-  type: SKIP_MOVIE,
 });
 
 export const likeMovie = movieId => ({
