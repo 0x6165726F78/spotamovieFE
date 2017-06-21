@@ -11,10 +11,10 @@ import {
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
-import * as ActionCreators from '~/actions';
-import { MovieListItem, MovieModal } from '~/components';
-import { purgeStoreAsync } from '~/lib/reduxPersistWrapper';
-import store from '~/state';
+import * as ActionCreators from '../actions';
+import { MovieListItem, MovieModal } from '../components';
+import { purgeStoreAsync } from '../lib/reduxPersistWrapper';
+import store from '../state';
 import I18n from 'react-native-i18n';
 const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
   <TouchableOpacity

@@ -1,30 +1,11 @@
-import * as ActionCreators from '../app/actions';
+import * as ActionCreators from '../actions';
+import { SpotifySymbol, TMDBSymbol } from '../lib/apiMiddleware.js';
 
 describe('Action creators for SpotifySymbol', () => {
-  it('getMoviesRecommendation', () => {
-    const expectedAction = {
-      type: 'GET_MOVIE_RECOMMENDATION',
-      [ActionCreators.SpotifySymbol]: {
-        endpoint: `/movies/recommendation`,
-        method: 'GET',
-      },
-    };
-    expect(ActionCreators.getMovieRecommendation()).toEqual(expectedAction);
-  });
-  it('getMoviesSurvey', () => {
-    const expectedAction = {
-      type: 'GET_MOVIES_SURVEY',
-      [ActionCreators.SpotifySymbol]: {
-        endpoint: `/movies/survey`,
-        method: 'GET',
-      },
-    };
-    expect(ActionCreators.getMoviesSurvey()).toEqual(expectedAction);
-  });
   it('getMoviesLiked', () => {
     const expectedAction = {
       type: 'GET_MOVIES_LIKED',
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: `/movies/liked`,
         method: 'GET',
       },
@@ -34,7 +15,7 @@ describe('Action creators for SpotifySymbol', () => {
   it('getMoviesDisliked', () => {
     const expectedAction = {
       type: 'GET_MOVIES_DISLIKED',
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: `/movies/disliked`,
         method: 'GET',
       },
@@ -46,7 +27,7 @@ describe('Action creators for SpotifySymbol', () => {
     const expectedAction = {
       type: 'DISLIKE_MOVIE',
       movieId,
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: `/movies/${movieId}/dislike`,
         method: 'POST',
       },
@@ -58,7 +39,7 @@ describe('Action creators for SpotifySymbol', () => {
     const expectedAction = {
       type: 'LIKE_MOVIE',
       movieId,
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: `/movies/${movieId}/like`,
         method: 'POST',
       },
@@ -70,7 +51,7 @@ describe('Action creators for SpotifySymbol', () => {
     const expectedAction = {
       type: 'UNLIKE_MOVIE',
       movieId,
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: `/movies/${movieId}/unlike`,
         method: 'POST',
       },
@@ -82,7 +63,7 @@ describe('Action creators for SpotifySymbol', () => {
     const expectedAction = {
       type: 'UNDISLIKE_MOVIE',
       movieId,
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: `/movies/${movieId}/undislike`,
         method: 'POST',
       },
@@ -98,7 +79,7 @@ describe('Action creators for TMDB', () => {
     const expectedAction = {
       type: 'GET_MOVIE',
       list,
-      [ActionCreators.TMDBSymbol]: {
+      [TMDBSymbol]: {
         endpoint: `/movie/${movieId}`,
         method: 'GET',
       },
@@ -112,7 +93,7 @@ describe('Action creators for LOGIN', () => {
     const code = 'fjdslfjsf9344282';
     const expectedAction = {
       type: 'LOGIN',
-      [ActionCreators.SpotifySymbol]: {
+      [SpotifySymbol]: {
         endpoint: '/login',
         method: 'POST',
         data: {

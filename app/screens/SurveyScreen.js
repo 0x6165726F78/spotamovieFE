@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SwipeCards from 'react-native-swipe-cards';
-import * as ActionCreators from '~/actions';
+import * as ActionCreators from '../actions';
 import { connect } from 'react-redux';
 import { Spinner, Button, themeManager } from 'nachos-ui';
-import { MovieCard, LoadingView, MovieModal } from '~/components';
+import { MovieCard, LoadingView, MovieModal } from '../components';
 import I18n from 'react-native-i18n';
-import colors from '~/colors';
+import colors from '../colors';
 
 const { darkRedColor, lightGreenColor, backgroundColor } = colors;
 

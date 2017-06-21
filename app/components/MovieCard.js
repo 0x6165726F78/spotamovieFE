@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import config from '~/config';
+import config from '../config';
 
 export default function MovieCard({ poster_path }) {
   return (

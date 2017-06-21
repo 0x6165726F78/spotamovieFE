@@ -9,10 +9,10 @@ import {
   StatusBar,
 } from 'react-native';
 import { connect } from 'react-redux';
-import * as ActionCreators from '~/actions';
-import { LoadingView } from '~/components';
-import colors from '~/colors';
-import { spotifyOauth } from '~/lib/spotifyApiWrapper';
+import * as ActionCreators from '../actions';
+import { LoadingView } from '../components';
+import colors from '../colors';
+import { spotifyOauth } from '../lib/spotifyApiWrapper';
 import I18n from 'react-native-i18n';
 const { backgroundColor, darkGreenColor } = colors;
 

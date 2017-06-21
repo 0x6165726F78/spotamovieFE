@@ -5,8 +5,8 @@ import {
   SuggestionsScreen,
   WizardScreen,
   SurveyScreen,
-} from '~/screens';
-import colors from '~/colors';
+} from '../screens';
+import colors from '../colors';
 
 const TAB_BAR_INITAL_ROUTE = 'Suggestions';
 const STACK_INITIAL_ROUTE = 'Login';

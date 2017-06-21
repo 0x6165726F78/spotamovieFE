@@ -8,7 +8,7 @@ import {
   Text,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import config from '~/config';
+import config from '../config';
 import I18n from 'react-native-i18n';
 
 class MovieCard extends Component {

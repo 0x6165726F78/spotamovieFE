@@ -1,5 +1,5 @@
 import { REHYDRATE } from 'redux-persist/constants';
-import types from '~/actions/types';
+import types from '../actions/types';
 const { LOADING, LOGIN_SUCCESS } = types;
 const INITIAL_STATE = { loading: false };
 

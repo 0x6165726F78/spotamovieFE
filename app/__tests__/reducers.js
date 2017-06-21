@@ -1,11 +1,10 @@
-import * as ActionCreators from '../app/actions';
-import reducer from '../app/reducers';
-import movies from '../app/reducers/moviesReducer';
-import moviesSurvey from '../app/reducers/moviesSurveyReducer';
-import moviesLiked from '../app/reducers/moviesLikedReducer';
-import moviesDisliked from '../app/reducers/moviesDislikedReducer';
-import movieRecomm from '../app/reducers/movieRecommReducer';
-import user from '../app/reducers/userReducer';
+import * as ActionCreators from '../actions';
+import reducer from '../reducers';
+import movies from '../reducers/moviesReducer';
+import moviesSurvey from '../reducers/moviesSurveyReducer';
+import moviesLiked from '../reducers/moviesLikedReducer';
+import moviesDisliked from '../reducers/moviesDislikedReducer';
+import user from '../reducers/userReducer';
 
 const movieMock = {
   seen: false,
@@ -17,17 +16,6 @@ const movieMock = {
 const movieIdMocks = [1212334, 42345345, 52455];
 
 describe('Tests for reducer: movies', () => {
-  it('should handle GET_MOVIES_DISCOVER when receiving movie object', () => {
-    expect(
-      movies([], {
-        type: 'GET_MOVIES_DISCOVER_SUCCESS',
-        response: {
-          results: [movieMock],
-        },
-      })
-    ).toEqual([movieMock]);
-  });
-
   it('should handle GET_MOVIE when receiving movie object', () => {
     expect(
       movies([], {
@@ -108,19 +96,6 @@ describe('Tests for reducer: moviesLiked - moviesDisliked', () => {
         },
       })
     ).toEqual([movieIdMocks]);
-  });
-});
-
-describe('Tests for reducer: movieRecomm', () => {
-  it('should handle GET_MOVIE_RECOMMENDATION when receiving a movieId', () => {
-    expect(
-      movieRecomm([], {
-        type: 'GET_MOVIE_RECOMMENDATION_SUCCESS',
-        response: {
-          movies: movieIdMocks,
-        },
-      })
-    ).toEqual(movieIdMocks);
   });
 });
 

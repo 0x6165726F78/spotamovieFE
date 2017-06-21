@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import colors from '~/colors';
+import colors from '../colors';
 import I18n from 'react-native-i18n';
 
 const { darkGreenColor, backgroundColor } = colors;

@@ -1,6 +1,6 @@
 import { Linking } from 'react-native';
 import querystring from 'querystring';
-import config from '~/config';
+import config from '../config';
 const scope = 'user-read-private user-read-email playlist-read-private';
 const state = generateRandomString(16);
 

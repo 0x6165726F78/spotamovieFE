@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import config from '~/config';
+import config from '../config';
 
 export default function MovieListItem({ image, onRemove }) {
   return (

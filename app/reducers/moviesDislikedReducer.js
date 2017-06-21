@@ -1,5 +1,5 @@
 import { REHYDRATE } from 'redux-persist/constants';
-import types from '~/actions/types';
+import types from '../actions/types';
 const {
   GET_MOVIES_DISLIKED_SUCCESS,
   UNDISLIKE_MOVIE_REQUEST,
