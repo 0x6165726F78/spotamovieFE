@@ -82,6 +82,60 @@ export default class MovieModal extends Component {
   }
 }
 
+function MovieCard({
+  movie: {
+    overview,
+    backdropPath,
+    title,
+    releaseDate,
+    voteAverage,
+    poster_path,
+  },
+}) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.marginRow} />
+      <View style={styles.cardContainer}>
+        <View style={styles.row}>
+          <Image
+            style={styles.backdrop}
+            source={{
+              uri: `${config.IMG_BASE_URI}/${backdropPath}`,
+            }}
+          />
+        </View>
+
+        <View style={styles.middleRow}>
+          <View style={[styles.box, styles.box3]}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.date}>{releaseDate}</Text>
+            <Text style={styles.voteAverage}>
+              <Icon name="md-pulse" size={16} color="goldenrod" />{' '}
+              {voteAverage}/10
+            </Text>
+          </View>
+
+          <Image
+            style={styles.thumbnail}
+            source={{
+              uri: `${config.IMG_BASE_URI}/${poster_path}`,
+            }}
+          />
+        </View>
+
+        <View style={styles.row}>
+          <View style={[styles.box, styles.box2]}>
+            <Text style={styles.description}>Description</Text>
+            <Text />
+            <Text style={styles.overview}>{overview.substring(0, 312)}</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.marginRow} />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   modalOuterContainer: {
     flex: 1,

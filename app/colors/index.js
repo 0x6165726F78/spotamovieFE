@@ -9,4 +9,5 @@ export default {
   backgroundColor: '#23222E',
   lightGreenColor: '#94de45',
   darkGreenColor: '#62C654',
+  darkRedColor: '#ED462C',
 };
