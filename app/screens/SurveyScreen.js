@@ -14,17 +14,14 @@ import * as ActionCreators from '~/actions';
 import { connect } from 'react-redux';
 import { Spinner, Button, themeManager } from 'nachos-ui';
 import { MovieCard, LoadingView, MovieModal } from '~/components';
-
-const iconHeart = <Icon name="md-heart" size={40} color="white" />;
-const iconClose = <Icon name="md-close" size={40} color="white" />;
+import colors from '~/colors';
+const { darkRedColor, lightGreenColor, backgroundColor } = colors;
 
 const buttonTheme = themeManager.getStyle('Button');
 const transparentButtonStyle = {
   ...buttonTheme,
   BUTTON_STATE_PRIMARY: 'transparent',
 };
-
-btnStyle = { margin: 5 };
 
 @connect(data => SurveyScreen.getData, ActionCreators)
 export default class SurveyScreen extends Component {
@@ -65,49 +62,44 @@ export default class SurveyScreen extends Component {
     return <LoadingView title="Loading Movies..." />;
   };
 
-  handleYup = ({ id }) => {
-    // console.log('like', id)
-    // this.props.likeMovie(id)
-    // this.setState({ cardIndex: this.state.cardIndex + 1 })
+  _handleYup = ({ id }) => {
     const movieId = this.props.movies[this.state.cardIndex].id;
     this.setState({ cardIndex: this.state.cardIndex + 1 });
     this.props.likeMovie(String(id));
   };
 
-  handleNope = ({ id }) => {
+  _handleNope = ({ id }) => {
     console.log('dislike', id);
     this.props.dislikeMovie(String(id));
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
-  handleNoMore = () => {
+  _handleNoMore = () => {
     this.props.getMoviesSurvey();
     this.setState({ cardIndex: 0 });
     this.props.resetMovies();
     this.props.navigation.navigate('Main');
   };
 
-  clickSkip = () => {
+  _clickSkip = () => {
     this._swiper._goToNextCard();
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
-  clickLike = () => {
+  _clickLike = () => {
     const { id } = this.props.movies[this.state.cardIndex];
-    console.log('like', id);
     this.props.likeMovie(String(id));
     this._swiper._goToNextCard();
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
-  clickDislike = () => {
+  _clickDislike = () => {
     const { id } = this.props.movies[this.state.cardIndex];
-    console.log('dislike', id);
     this.props.dislikeMovie(String(id));
     this._swiper._goToNextCard();
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
-  openModal = movie => {
+  _openModal = movie => {
     this.setState({ modalVisible: true, movie });
   };
 
@@ -123,33 +115,37 @@ export default class SurveyScreen extends Component {
         </View>
         <TouchableOpacity
           onPress={() =>
-            this.openModal(this.props.movies[this.state.cardIndex])}
+            this._openModal(this.props.movies[this.state.cardIndex])}
           style={styles.posterView}
         >
           <SwipeCards
             ref={ref => (this._swiper = ref)}
             cards={this.props.movies}
             renderCard={data => <MovieCard {...data} />}
-            handleYup={this.handleYup}
-            handleNope={this.handleNope}
-            renderNoMoreCards={this.handleNoMore}
+            handleYup={this._handleYup}
+            handleNope={this._handleNope}
+            renderNoMoreCards={this._handleNoMore}
           />
         </TouchableOpacity>
 
         <View style={styles.buttonRow1}>
           <TouchableHighlight
             style={styles.btnHighLightClose}
-            onPress={this.clickDislike}
+            onPress={this._clickDislike}
             underlayColor="#ED462C"
           >
-            <Text style={styles.txtHighLight}>{iconClose}</Text>
+            <Text style={styles.txtHighLight}>
+              <Icon name="md-close" size={40} color="white" />
+            </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.btnHighLightHeart}
-            onPress={this.clickLike}
+            onPress={this._clickLike}
             underlayColor="#94de45"
           >
-            <Text style={styles.txtHighLight}>{iconHeart}</Text>
+            <Text style={styles.txtHighLight}>
+              <Icon name="md-heart" size={40} color="white" />
+            </Text>
           </TouchableHighlight>
         </View>
 
@@ -157,8 +153,7 @@ export default class SurveyScreen extends Component {
           <Button
             type="primary"
             theme={transparentButtonStyle}
-            onPress={this.clickSkip}
-            // iconName='md-close'
+            onPress={this._clickSkip}
           >
             I don't know
           </Button>
@@ -167,7 +162,7 @@ export default class SurveyScreen extends Component {
 
         <MovieModal
           visible={this.state.modalVisible}
-          onClose={this.closeModal}
+          onClose={this._closeModal}
           movie={this.state.movie}
         />
 
@@ -177,7 +172,7 @@ export default class SurveyScreen extends Component {
     );
   };
 
-  closeModal = () => {
+  _closeModal = () => {
     this.setState({ modalVisible: false });
   };
 
@@ -194,13 +189,13 @@ export default class SurveyScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#23222E',
+    backgroundColor: backgroundColor,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
   },
   containerLoader: {
-    backgroundColor: '#23222E',
+    backgroundColor: backgroundColor,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
@@ -231,7 +226,6 @@ const styles = StyleSheet.create({
   buttonRow1: {
     marginTop: 20,
     flex: 0.1,
-    // backgroundColor: 'yellow',
     flexDirection: 'row',
     alignItems: 'center',
     margin: 5,
@@ -239,23 +233,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   buttonView1: {
-    // flex: 0.1,
-    // backgroundColor:'deeppink',
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'row',
   },
   buttonView2: {
     flex: 0.1,
-    // backgroundColor:'chartreuse',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
     width: 200,
-  },
-  btnStyle: {
-    // flex: 1,
-    margin: 5,
   },
   btnHighLightHeart: {
     height: 70,
@@ -263,10 +250,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     margin: 10,
-    backgroundColor: '#94de45',
+    backgroundColor: lightGreenColor,
     borderRadius: 35,
     borderWidth: 2,
-    borderColor: 'rgba(0,0,0,0)',
+    borderColor: 'black',
   },
   btnHighLightClose: {
     height: 70,
@@ -274,29 +261,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     margin: 10,
-    backgroundColor: '#ED462C',
+    backgroundColor: darkRedColor,
     borderRadius: 35,
     borderWidth: 2,
-    borderColor: 'rgba(0,0,0,0)',
+    borderColor: 'black',
   },
   txtHighLight: {
     marginTop: 5,
     justifyContent: 'center',
-    color: '#94de45',
+    color: lightGreenColor,
     textAlign: 'center',
-  },
-  modal1: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-  },
-
-  modal: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    backgroundColor: 'rgba(0,0,0,0.8)',
   },
 });
