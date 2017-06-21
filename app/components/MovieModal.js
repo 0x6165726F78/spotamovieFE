@@ -10,59 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '~/config';
 
-class MovieCard extends Component {
-  render() {
-    const overview = this.props.movie.overview;
-    const lengthOv = 312;
-    let trimmedOv = overview.length > lengthOv
-      ? overview.substring(0, lengthOv) + '...'
-      : overview;
-    return (
-      <View style={styles.container}>
-        <View style={styles.marginRow} />
-        <View style={styles.cardContainer}>
-          <View style={styles.row}>
-            <Image
-              style={styles.backdrop}
-              source={{
-                uri: `${config.IMG_BASE_URI}/${this.props.movie.backdropPath}`,
-              }}
-            />
-          </View>
-
-          <View style={styles.middleRow}>
-            <View style={[styles.box, styles.box3]}>
-              <Text style={styles.title}>{this.props.movie.title}</Text>
-              <Text style={styles.date}>{this.props.movie.releaseDate}</Text>
-              <Text style={styles.voteAverage}>
-                <Icon name="md-pulse" size={16} color="goldenrod" />{' '}
-                {this.props.movie.voteAverage}/10
-              </Text>
-            </View>
-
-            <Image
-              style={styles.thumbnail}
-              source={{
-                uri: `${config.IMG_BASE_URI}/${this.props.movie.poster_path}`,
-              }}
-            />
-          </View>
-
-          <View style={styles.row}>
-            <View style={[styles.box, styles.box2]}>
-              <Text style={styles.description}>Description</Text>
-              <Text />
-              <Text style={styles.overview}>{trimmedOv}</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.marginRow} />
-      </View>
-    );
-  }
-}
-
 export default class MovieModal extends Component {
   render() {
     const { onClose, movie, visible } = this.props;
@@ -79,6 +26,60 @@ export default class MovieModal extends Component {
       </Modal>
     );
   }
+}
+
+function MovieCard({
+  movie: {
+    overview,
+    backdropPath,
+    title,
+    releaseDate,
+    voteAverage,
+    poster_path,
+  },
+}) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.marginRow} />
+      <View style={styles.cardContainer}>
+        <View style={styles.row}>
+          <Image
+            style={styles.backdrop}
+            source={{
+              uri: `${config.IMG_BASE_URI}/${backdropPath}`,
+            }}
+          />
+        </View>
+
+        <View style={styles.middleRow}>
+          <View style={[styles.box, styles.box3]}>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.date}>{releaseDate}</Text>
+            <Text style={styles.voteAverage}>
+              <Icon name="md-pulse" size={16} color="goldenrod" />{' '}
+              {voteAverage}/10
+            </Text>
+          </View>
+
+          <Image
+            style={styles.thumbnail}
+            source={{
+              uri: `${config.IMG_BASE_URI}/${poster_path}`,
+            }}
+          />
+        </View>
+
+        <View style={styles.row}>
+          <View style={[styles.box, styles.box2]}>
+            <Text style={styles.description}>Description</Text>
+            <Text />
+            <Text style={styles.overview}>{overview.substring(0, 312)}</Text>
+          </View>
+        </View>
+      </View>
+      <View style={styles.marginRow} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
