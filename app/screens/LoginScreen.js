@@ -13,6 +13,7 @@ import * as ActionCreators from '~/actions';
 import { LoadingView } from '~/components';
 import colors from '~/colors';
 import { spotifyOauth } from '~/lib/spotifyApiWrapper';
+import I18n from 'react-native-i18n';
 const { backgroundColor, darkGreenColor } = colors;
 
 @connect(data => LoginScreen.getDataProps, ActionCreators)
@@ -43,12 +44,12 @@ export default class LoginScreen extends Component {
         </View>
         <View style={styles.containerSubheading}>
           <Text style={styles.subheading}>
-            Get movie recommendations based on your music preferences
+            {I18n.t('recommendations')}
           </Text>
         </View>
         <View style={styles.containerInstructions}>
           <Text style={styles.instructions}>
-            Sign in with Spotify so we can process your playlists
+            {I18n.t('signIn')}
           </Text>
         </View>
         <View style={styles.startContainer}>
@@ -62,7 +63,9 @@ export default class LoginScreen extends Component {
                 style={styles.spotifyIcon}
                 source={require('../assets/spotifyIconBlack.png')}
               />
-              <Text style={styles.startText}>SIGN IN WITH SPOTIFY</Text>
+              <Text style={styles.startText}>
+                {I18n.t('signButton')}
+              </Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -81,7 +84,7 @@ export default class LoginScreen extends Component {
 
   render() {
     return this.props.user.loading
-      ? <LoadingView title="LOGGING IN..." />
+      ? <LoadingView title={I18n.t('logging')} />
       : this._renderMainView();
   }
 }

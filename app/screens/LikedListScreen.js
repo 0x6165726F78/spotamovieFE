@@ -15,7 +15,7 @@ import * as ActionCreators from '~/actions';
 import { MovieListItem, MovieModal } from '~/components';
 import { purgeStoreAsync } from '~/lib/reduxPersistWrapper';
 import store from '~/state';
-
+import I18n from 'react-native-i18n';
 const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
   <TouchableOpacity
     style={{ marginRight: 8 }}
@@ -32,7 +32,7 @@ const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
 @connect(data => LikedListScreen.getDataProps, ActionCreators)
 export default class LikedListScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'MOVIES LIKED',
+    title: I18n.t('likedMovies'),
     headerTitleStyle: {
       fontSize: 20,
     },
@@ -43,7 +43,7 @@ export default class LikedListScreen extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Liked',
+    tabBarLabel: I18n.t('Liked'),
   });
 
   filteredMovies = [];
@@ -75,7 +75,7 @@ export default class LikedListScreen extends Component {
     modalVisible: false,
     cardIndex: 0,
     value: 'Liked',
-    values: ['Liked', 'Disliked'],
+    values: [I18n.t('Liked'), I18n.t('Disliked')],
     selectedIndex: 0,
     fetchedLiked: false,
     fetchedDisliked: false,

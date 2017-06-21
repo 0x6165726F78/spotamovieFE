@@ -4,6 +4,7 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 import Router from './navigation';
 import store from './state';
+import './config/i18nSetup';
 
 const App = () =>
   <Provider store={store}>

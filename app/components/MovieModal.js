@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import config from '~/config';
+import I18n from 'react-native-i18n';
 
 class MovieCard extends Component {
   render() {
@@ -50,7 +51,7 @@ class MovieCard extends Component {
 
           <View style={styles.row}>
             <View style={[styles.box, styles.box2]}>
-              <Text style={styles.description}>Description</Text>
+              <Text style={styles.description}>{I18n.t('description')}</Text>
               <Text />
               <Text style={styles.overview}>{trimmedOv}</Text>
             </View>

@@ -14,6 +14,7 @@ import * as ActionCreators from '~/actions';
 import { connect } from 'react-redux';
 import { Spinner, Button, themeManager } from 'nachos-ui';
 import { MovieCard, LoadingView, MovieModal } from '~/components';
+import I18n from 'react-native-i18n';
 
 const iconHeart = <Icon name="md-heart" size={40} color="white" />;
 const iconClose = <Icon name="md-close" size={40} color="white" />;
@@ -45,7 +46,7 @@ export default class SurveyScreen extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Discover',
+    tabBarLabel: I18n.t('Discover'),
   };
   static getData = ({ movies, moviesSurvey }) => ({ movies, moviesSurvey });
 
@@ -62,7 +63,7 @@ export default class SurveyScreen extends Component {
   }
 
   _renderLoadingIndicator = () => {
-    return <LoadingView title="Loading Movies..." />;
+    return <LoadingView title={I18n.t('loadingMovies')} />;
   };
 
   handleYup = ({ id }) => {
@@ -160,7 +161,7 @@ export default class SurveyScreen extends Component {
             onPress={this.clickSkip}
             // iconName='md-close'
           >
-            I don't know
+            {I18n.t('idk')}
           </Button>
 
         </View>
