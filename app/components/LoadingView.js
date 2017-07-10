@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { Spinner } from 'nachos-ui';
-import colors from '~/colors';
+import colors from '../colors';
 const { lightGreenColor, backgroundColor } = colors;
 
 export default function LoadingView({ title }) {

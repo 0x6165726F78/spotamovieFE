@@ -55,3 +55,4 @@ fastlane/screenshots
 bower_components
 
 config.js
+./app/config/index.js

@@ -10,12 +10,17 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SwipeCards from 'react-native-swipe-cards';
-import * as ActionCreators from '~/actions';
+import * as ActionCreators from '../actions';
 import { connect } from 'react-redux';
 import { Spinner, Button, themeManager } from 'nachos-ui';
-import { MovieCard, LoadingView, MovieModal } from '~/components';
-import colors from '~/colors';
+import { MovieCard, LoadingView, MovieModal } from '../components';
+import I18n from 'react-native-i18n';
+import colors from '../colors';
+
 const { darkRedColor, lightGreenColor, backgroundColor } = colors;
+
+const iconHeart = <Icon name="md-heart" size={40} color="white" />;
+const iconClose = <Icon name="md-close" size={40} color="white" />;
 
 const buttonTheme = themeManager.getStyle('Button');
 const transparentButtonStyle = {
@@ -42,7 +47,7 @@ export default class SurveyScreen extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Discover',
+    tabBarLabel: I18n.t('Discover'),
   };
   static getData = ({ movies, moviesSurvey }) => ({ movies, moviesSurvey });
 
@@ -59,7 +64,7 @@ export default class SurveyScreen extends Component {
   }
 
   _renderLoadingIndicator = () => {
-    return <LoadingView title="Loading Movies..." />;
+    return <LoadingView title={I18n.t('loadingMovies')} />;
   };
 
   _handleYup = ({ id }) => {
@@ -155,7 +160,7 @@ export default class SurveyScreen extends Component {
             theme={transparentButtonStyle}
             onPress={this._clickSkip}
           >
-            I don't know
+            {I18n.t('idk')}
           </Button>
 
         </View>

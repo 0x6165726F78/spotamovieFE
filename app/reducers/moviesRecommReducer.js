@@ -1,4 +1,4 @@
-import types from '~/actions/types';
+import types from '../actions/types';
 const { GET_MOVIES_RECOMMENDATION_SUCCESS } = types;
 
 export default (state = [], { type, response }) =>

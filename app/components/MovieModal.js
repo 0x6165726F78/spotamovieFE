@@ -8,7 +8,61 @@ import {
   Text,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import config from '~/config';
+import config from '../config';
+import I18n from 'react-native-i18n';
+
+class MovieCard extends Component {
+  render() {
+    const overview = this.props.movie.overview;
+    const lengthOv = 312;
+    let trimmedOv = overview.length > lengthOv
+      ? overview.substring(0, lengthOv) + '...'
+      : overview;
+    return (
+      <View style={styles.container}>
+        <View style={styles.marginRow} />
+        <View style={styles.cardContainer}>
+          <View style={styles.row}>
+            <Image
+              style={styles.backdrop}
+              source={{
+                uri: `${config.IMG_BASE_URI}/${this.props.movie.backdropPath}`,
+              }}
+            />
+          </View>
+
+          <View style={styles.middleRow}>
+            <View style={[styles.box, styles.box3]}>
+              <Text style={styles.title}>{this.props.movie.title}</Text>
+              <Text style={styles.date}>{this.props.movie.releaseDate}</Text>
+              <Text style={styles.voteAverage}>
+                <Icon name="md-pulse" size={16} color="goldenrod" />{' '}
+                {this.props.movie.voteAverage}/10
+              </Text>
+            </View>
+
+            <Image
+              style={styles.thumbnail}
+              source={{
+                uri: `${config.IMG_BASE_URI}/${this.props.movie.poster_path}`,
+              }}
+            />
+          </View>
+
+          <View style={styles.row}>
+            <View style={[styles.box, styles.box2]}>
+              <Text style={styles.description}>{I18n.t('description')}</Text>
+              <Text />
+              <Text style={styles.overview}>{trimmedOv}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.marginRow} />
+      </View>
+    );
+  }
+}
 
 export default class MovieModal extends Component {
   render() {

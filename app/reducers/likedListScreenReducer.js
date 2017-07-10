@@ -1,4 +1,4 @@
-import types from '~/actions/types';
+import types from '../actions/types';
 const { ON_VALUE_CHANGE } = types;
 
 const INITIAL_STATE = {

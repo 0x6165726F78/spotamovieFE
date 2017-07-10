@@ -7,7 +7,7 @@ import moviesDisliked from './moviesDislikedReducer';
 import moviesRecomm from './moviesRecommReducer';
 import moviesCached from './moviesCachedReducer';
 import likedListScreen from './likedListScreenReducer';
-import types from '~/actions/types';
+import types from '../actions/types';
 const { LOGOUT } = types;
 
 const reducers = combineReducers({

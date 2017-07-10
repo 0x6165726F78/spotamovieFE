@@ -1,4 +1,4 @@
-import { SpotifySymbol, TMDBSymbol } from '~/lib/apiMiddleware.js';
+import { SpotifySymbol, TMDBSymbol } from '../lib/apiMiddleware.js';
 import types from './types';
 const {
   GET_MOVIE,

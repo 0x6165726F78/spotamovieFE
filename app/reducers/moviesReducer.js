@@ -1,4 +1,4 @@
-import types from '~/actions/types';
+import types from '../actions/types';
 const { GET_MOVIE_SUCCESS, RESET_MOVIES } = types;
 
 export default (state = [], { type, list, response }) => {

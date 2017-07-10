@@ -4,6 +4,7 @@ export default {
   redirect_uri: 'spotamovie://callback',
   DEV_URL: 'http://localhost:3000',
   PROD_URL: '',
+  MOCK_URL: 'https://private-bd796b-spotamovie.apiary-mock.com',
   API_URL: 'https://api.themoviedb.org/3',
   IMG_BASE_URI: 'https://image.tmdb.org/t/p/w500',
 };

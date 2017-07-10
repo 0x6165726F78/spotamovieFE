@@ -11,12 +11,18 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import SwipeCards from 'react-native-swipe-cards';
 import { connect } from 'react-redux';
 import { Spinner, Button, themeManager } from 'nachos-ui';
-import * as ActionCreators from '~/actions';
-import { MovieCard, LoadingView, MovieModal } from '~/components';
-import colors from '~/colors';
+import * as ActionCreators from '../actions';
+import { MovieCard, LoadingView, MovieModal } from '../components';
+import I18n from 'react-native-i18n';
+import colors from '../colors';
+
 const { darkRedColor, lightGreenColor, backgroundColor } = colors;
 
+const iconHeart = <Icon name="md-heart" size={40} color="white" />;
+const iconClose = <Icon name="md-close" size={40} color="white" />;
+
 const buttonTheme = themeManager.getStyle('Button');
+
 const transparentButtonStyle = {
   ...buttonTheme,
   BUTTON_STATE_PRIMARY: 'transparent',
@@ -33,8 +39,8 @@ export default class DiscoverScreen extends Component {
     modalVisible: false,
   };
 
-  static navigationOptions = {
-    title: 'DISCOVER',
+  static navigationOptions = () => ({
+    title: I18n.t('discover'),
     headerTitleStyle: {
       fontSize: 20,
     },
@@ -44,8 +50,8 @@ export default class DiscoverScreen extends Component {
         color={tintColor}
         size={32}
       />,
-    tabBarLabel: 'Suggestions',
-  };
+    tabBarLabel: I18n.t('Suggestions'),
+  });
 
   static getData = ({ moviesRecomm, movies }) => {
     return {
@@ -61,7 +67,7 @@ export default class DiscoverScreen extends Component {
   }
 
   _renderLoadingIndicator = () => {
-    return <LoadingView title="Loading Movies..." />;
+    return <LoadingView title={I18n.t('loadingMovies') + '...'} />;
   };
 
   _handleYup = ({ id }) => {
@@ -133,7 +139,7 @@ export default class DiscoverScreen extends Component {
             theme={transparentButtonStyle}
             onPress={this._clickSkip}
           >
-            I don't know
+            {I18n.t('idk')}
           </Button>
 
         </View>

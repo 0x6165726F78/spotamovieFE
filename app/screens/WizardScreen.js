@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import colors from '~/colors';
+import colors from '../colors';
+import I18n from 'react-native-i18n';
+
 const { darkGreenColor, backgroundColor } = colors;
 
 export default class Wizard extends Component {
@@ -13,12 +15,11 @@ export default class Wizard extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.containerHeading}>
-          <Text style={styles.heading}>Tell us about your movie prefs</Text>
+          <Text style={styles.heading}>{I18n.t('tellUS')}</Text>
         </View>
         <View style={styles.containerSubheading}>
           <Text style={styles.subheading}>
-            This app is young, so we need to create a base of movie preferences
-            to detect connections with your music taste.
+            {I18n.t('appYoung')}
           </Text>
         </View>
 
@@ -28,7 +29,7 @@ export default class Wizard extends Component {
           style={styles.containerStart}
         >
           <View style={styles.start} underlayColor="#fff">
-            <Text style={styles.startText}>START SURVEY</Text>
+            <Text style={styles.startText}>{I18n.t('startWizard')}</Text>
           </View>
           <View underlayColor="#fff">
             <Text style={styles.arrowIcon}>
