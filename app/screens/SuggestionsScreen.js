@@ -6,20 +6,15 @@ import {
   StatusBar,
   TouchableHighlight,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SwipeCards from 'react-native-swipe-cards';
-import * as ActionCreators from '../../actions';
 import { connect } from 'react-redux';
-import { styles } from './styles';
 import { Spinner, Button, themeManager } from 'nachos-ui';
-import { ButtonsGroup, Card, NoMoreCard } from './components';
-import LoadingView from '../../components/LoadingView';
-import MovieCard from '../../components/MovieCard';
-
-const iconHeart = <Icon name="md-heart" size={40} color="white" />;
-const iconClose = <Icon name="md-close" size={40} color="white" />;
+import * as ActionCreators from '~/actions';
+import { MovieCard, LoadingView, MovieModal } from '~/components';
+import colors from '~/colors';
+const { darkRedColor, lightGreenColor, backgroundColor } = colors;
 
 const buttonTheme = themeManager.getStyle('Button');
 const transparentButtonStyle = {
@@ -27,13 +22,10 @@ const transparentButtonStyle = {
   BUTTON_STATE_PRIMARY: 'transparent',
 };
 
-btnStyle = { margin: 5 };
-
-// getMovieRecommendation
 @connect(data => DiscoverScreen.getData, ActionCreators)
 export default class DiscoverScreen extends Component {
   componentDidMount() {
-    this.props.getMovieRecommendation();
+    this.props.getMoviesRecommendation();
   }
 
   state = {
@@ -55,16 +47,16 @@ export default class DiscoverScreen extends Component {
     tabBarLabel: 'Suggestions',
   };
 
-  static getData = ({ movieRecomm, movies }) => {
+  static getData = ({ moviesRecomm, movies }) => {
     return {
-      movieRecomm,
+      moviesRecomm,
       movies,
     };
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.movieRecomm !== this.props.movieRecomm) {
-      nextProps.movieRecomm.map(movieId => this.props.getMovieFromId(movieId));
+    if (nextProps.moviesRecomm !== this.props.moviesRecomm) {
+      nextProps.moviesRecomm.map(movieId => this.props.getMovieFromId(movieId));
     }
   }
 
@@ -72,23 +64,19 @@ export default class DiscoverScreen extends Component {
     return <LoadingView title="Loading Movies..." />;
   };
 
-  handleYup = ({ id }) => {
-    // console.log('like', id)
-    // this.props.likeMovie(id)
-    // this.setState({ cardIndex: this.state.cardIndex + 1 })
+  _handleYup = ({ id }) => {
     const movieId = this.props.movies[this.state.cardIndex].id;
     this.setState({ cardIndex: this.state.cardIndex + 1 });
     this.props.likeMovie(String(id));
   };
 
-  handleNope = ({ id }) => {
-    console.log('dislike', id);
+  _handleNope = ({ id }) => {
     this.props.dislikeMovie(String(id));
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
-  handleNoMore = () => {
-    this.props.getMovieRecommendation();
+  _handleNoMore = () => {
+    this.props.getMoviesRecommendation();
     this.setState({ cardIndex: 0 });
     this.props.resetMovies();
   };
@@ -105,33 +93,37 @@ export default class DiscoverScreen extends Component {
         </View>
         <TouchableOpacity
           onPress={() =>
-            this.openModal(this.props.movies[this.state.cardIndex])}
+            this._openModal(this.props.movies[this.state.cardIndex])}
           style={styles.posterView}
         >
           <SwipeCards
             ref={ref => (this._swiper = ref)}
             cards={this.props.movies}
-            renderCard={data => <Card {...data} />}
-            handleYup={this.handleYup}
-            handleNope={this.handleNope}
-            renderNoMoreCards={this.handleNoMore}
+            renderCard={data => <MovieCard {...data} />}
+            handleYup={this._handleYup}
+            handleNope={this._handleNope}
+            renderNoMoreCards={this._handleNoMore}
           />
         </TouchableOpacity>
 
         <View style={styles.buttonRow1}>
           <TouchableHighlight
             style={styles.btnHighLightClose}
-            onPress={this.clickDislike}
+            onPress={this._clickDislike}
             underlayColor="#ED462C"
           >
-            <Text style={styles.txtHighLight}>{iconClose}</Text>
+            <Text style={styles.txtHighLight}>
+              <Icon name="md-close" size={40} color="white" />
+            </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.btnHighLightHeart}
-            onPress={this.clickLike}
+            onPress={this._clickLike}
             underlayColor="#94de45"
           >
-            <Text style={styles.txtHighLight}>{iconHeart}</Text>
+            <Text style={styles.txtHighLight}>
+              <Icon name="md-heart" size={40} color="white" />
+            </Text>
           </TouchableHighlight>
         </View>
 
@@ -139,70 +131,148 @@ export default class DiscoverScreen extends Component {
           <Button
             type="primary"
             theme={transparentButtonStyle}
-            onPress={this.clickSkip}
-            // iconName='md-close'
+            onPress={this._clickSkip}
           >
             I don't know
           </Button>
 
         </View>
 
-        <Modal
-          animationType="fade"
-          transparent
+        <MovieModal
           visible={this.state.modalVisible}
-        >
-          <TouchableHighlight onPress={this.closeModal} style={styles.modal1}>
-            <View style={styles.modal}>
-              <MovieCard movie={this.state.movie} />
-            </View>
-          </TouchableHighlight>
-        </Modal>
+          onClose={this._closeModal}
+          movie={this.state.movie}
+        />
 
         <StatusBar hidden={false} barStyle="light-content" />
       </View>
     );
   };
-  closeModal = () => {
+  _closeModal = () => {
     this.setState({ modalVisible: false });
   };
 
-  openModal = movie => {
+  _openModal = movie => {
     this.setState({ modalVisible: true, movie });
   };
 
-  closeModal = () => {
+  _closeModal = () => {
     this.setState({ modalVisible: false });
   };
 
-  clickSkip = () => {
+  _clickSkip = () => {
     this._swiper._goToNextCard();
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
-  clickLike = () => {
+  _clickLike = () => {
     const { id } = this.props.movies[this.state.cardIndex];
-    console.log('like', id);
     this.props.likeMovie(String(id));
     this._swiper._goToNextCard();
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
-  clickDislike = () => {
+  _clickDislike = () => {
     const { id } = this.props.movies[this.state.cardIndex];
-    console.log('dislike', id);
     this.props.dislikeMovie(String(id));
     this._swiper._goToNextCard();
     this.setState({ cardIndex: this.state.cardIndex + 1 });
   };
 
   render() {
-    const { movies, movieRecomm } = this.props;
+    const { movies, moviesRecomm } = this.props;
 
-    if (!movies.length || movies.length < movieRecomm.length) {
+    if (!movies.length || movies.length < moviesRecomm.length) {
       return this._renderLoadingIndicator();
     }
 
     return this._renderMainScreen();
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: backgroundColor,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  containerLoader: {
+    backgroundColor: backgroundColor,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleView: {
+    flex: 0.1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+  },
+  title: {
+    fontFamily: 'Raleway-Bold',
+    fontSize: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    color: 'white',
+    marginBottom: 10,
+  },
+  posterView: {
+    flex: 0.6,
+    paddingRight: 60,
+    paddingLeft: 60,
+    alignItems: 'center',
+  },
+  buttonRow1: {
+    marginTop: 20,
+    flex: 0.1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 5,
+    width: 230,
+    justifyContent: 'space-between',
+  },
+  buttonView1: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  buttonView2: {
+    flex: 0.1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    width: 200,
+  },
+  btnHighLightHeart: {
+    height: 70,
+    width: 70,
+    justifyContent: 'center',
+    padding: 10,
+    margin: 10,
+    backgroundColor: lightGreenColor,
+    borderRadius: 35,
+    borderWidth: 2,
+    borderColor: 'black',
+  },
+  btnHighLightClose: {
+    height: 70,
+    width: 70,
+    justifyContent: 'center',
+    padding: 10,
+    margin: 10,
+    backgroundColor: darkRedColor,
+    borderRadius: 35,
+    borderWidth: 2,
+    borderColor: 'black',
+  },
+  txtHighLight: {
+    marginTop: 5,
+    justifyContent: 'center',
+    color: lightGreenColor,
+    textAlign: 'center',
+  },
+});

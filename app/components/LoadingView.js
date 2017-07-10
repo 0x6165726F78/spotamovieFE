@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
 import { Spinner } from 'nachos-ui';
+import colors from '~/colors';
+const { lightGreenColor, backgroundColor } = colors;
 
-export default class LoadingView extends Component {
-  static defaultProps = {
-    title: 'LOADING SURVEY...',
-  };
-
-  render() {
-    return (
-      <View style={styles.containerLoader}>
-        <View style={styles.titleView}>
-          <Text style={styles.title}>
-            {this.props.title}
-          </Text>
-          <Spinner color="#94de45" />
-        </View>
-        <StatusBar hidden={false} barStyle="light-content" />
+export default function LoadingView({ title }) {
+  return (
+    <View style={styles.containerLoader}>
+      <View style={styles.titleView}>
+        <Text style={styles.title}>
+          {title}
+        </Text>
+        <Spinner color={lightGreenColor} />
       </View>
-    );
-  }
+      <StatusBar hidden={false} barStyle="light-content" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -31,7 +27,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   containerLoader: {
-    backgroundColor: '#23222E',
+    backgroundColor: backgroundColor,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',

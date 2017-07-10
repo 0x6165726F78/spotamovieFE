@@ -1,51 +1,26 @@
-import types from '../actions/types';
-const {
-  GET_MOVIES_DISCOVER_SUCCESS,
-  GET_MOVIES_DISCOVER_ERROR,
-  GET_MOVIE_SUCCESS,
-  RESET_MOVIES,
-  GET_MOVIE_ERROR,
-} = types;
+import types from '~/actions/types';
+const { GET_MOVIE_SUCCESS, RESET_MOVIES } = types;
 
-export default (state = [], action) => {
-  switch (action.type) {
-    case GET_MOVIES_DISCOVER_SUCCESS:
-      if (action.response.results) {
-        let parsedMovies = parseMovies(action.response.results);
-        return parsedMovies;
-      }
-      return state;
-
-    case GET_MOVIES_DISCOVER_ERROR:
-      console.log('ERROR IN REDUCERS:', action.error);
-      return state;
-
-    case GET_MOVIE_SUCCESS:
-      if (action.list) {
+export default (state = [], { type, list, response }) => {
+  switch (type) {
+    case GET_MOVIE_SUCCESS: {
+      if (list) {
         return state;
       }
 
-      if (action.response) {
-        const movie = action.response;
-        if (state.find(movie => movie.id === action.response.id)) {
-          return state.map(movie => {
-            if (movie.id === action.response.id) {
-              return parseMovie(action.response);
-            }
-            return movie;
-          });
-        }
-        return [...state, parseMovie(action.response)];
+      if (state.find(movie => movie.id === response.id)) {
+        return state.map(movie => {
+          if (movie.id === response.id) {
+            return parseMovie(response);
+          }
+          return movie;
+        });
       }
-      return state;
+      return [...state, parseMovie(response)];
+    }
 
     case RESET_MOVIES:
-      console.log('Reset Movies Reducer');
       return [];
-
-    case GET_MOVIE_ERROR:
-      console.log('ERROR IN REDUCERS:', action.error);
-      return state;
 
     default:
       return state;
@@ -64,14 +39,4 @@ function parseMovie(data) {
     releaseDate: data.release_date,
     backdropPath: data.backdrop_path,
   };
-}
-
-function parseMovies(moviesArray) {
-  return moviesArray.map(movie => parseMovie(movie));
-}
-
-function parseMoviesSurvey(moviesArray) {
-  return moviesArray.map(movie => ({
-    movieSurveyId: movie,
-  }));
 }

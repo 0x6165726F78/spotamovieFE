@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   SegmentedControlIOS,
   ScrollView,
@@ -9,19 +8,20 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import * as ActionCreators from '../../actions';
 import { connect } from 'react-redux';
-import MovieItem from './components/MovieItem';
-import MovieCard from '../../components/MovieCard';
-import { styles } from './styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
+import * as ActionCreators from '~/actions';
+import { MovieListItem, MovieModal } from '~/components';
+import { purgeStoreAsync } from '~/lib/reduxPersistWrapper';
+import store from '~/state';
 
 const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
   <TouchableOpacity
     style={{ marginRight: 8 }}
     onPress={() => {
       logout();
+      purgeStoreAsync(store);
       onPress();
     }}
   >
@@ -29,7 +29,7 @@ const SignOutBtn = connect(null, ActionCreators)(({ logout, onPress }) =>
   </TouchableOpacity>
 );
 
-@connect(data => LikedListScreen.getData, ActionCreators)
+@connect(data => LikedListScreen.getDataProps, ActionCreators)
 export default class LikedListScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'MOVIES LIKED',
@@ -48,7 +48,7 @@ export default class LikedListScreen extends Component {
 
   filteredMovies = [];
 
-  static getData = (
+  static getDataProps = (
     { moviesCached, moviesLiked, moviesDisliked, likedListScreen },
     state
   ) => {
@@ -103,13 +103,9 @@ export default class LikedListScreen extends Component {
 
   _onValueChange = value => {
     this.props.onValueChange(value);
-
-    // this.setState({
-    //   value: value,
-    // })
   };
 
-  handleRemove = movieId => {
+  _handleRemove = movieId => {
     if (this.props.likedListScreen.value === 'Liked') {
       this.props.unLikeMovie(movieId);
     } else if (this.props.likedListScreen.value === 'Disliked') {
@@ -161,11 +157,11 @@ export default class LikedListScreen extends Component {
     this.props.getMoviesDisliked();
   }
 
-  closeModal = () => {
+  _closeModal = () => {
     this.setState({ modalVisible: false });
   };
 
-  openModal = movie => {
+  _openModal = movie => {
     this.setState({ modalVisible: true, movie });
   };
 
@@ -206,31 +202,26 @@ export default class LikedListScreen extends Component {
             {this.props.filteredMovies.map(movie =>
               <TouchableOpacity
                 key={movie.id}
-                onPress={() => this.openModal(movie)}
+                onPress={() => this._openModal(movie)}
               >
-                <MovieItem
+                <MovieListItem
                   title={movie.title}
                   image={movie.poster_path}
-                  onRemove={() => this.handleRemove(movie.id)}
+                  onRemove={() => this._handleRemove(movie.id)}
                 />
               </TouchableOpacity>
             )}
           </View>
         </ScrollView>
 
-        <Modal
-          animationType="fade"
-          transparent
+        <MovieModal
           visible={this.state.modalVisible}
-        >
-          <TouchableHighlight onPress={this.closeModal} style={styles.modal1}>
-            <View style={styles.modal}>
-              <MovieCard movie={this.state.movie} />
-            </View>
-          </TouchableHighlight>
-        </Modal>
-
+          onClose={this._closeModal}
+          movie={this.state.movie}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({});

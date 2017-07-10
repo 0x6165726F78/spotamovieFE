@@ -1,6 +1,7 @@
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
-
+export const SpotifySymbol = 'apiSpotifySymbol';
+export const TMDBSymbol = 'apiTMDBSymbol';
 export default (symbol, baseURL, endpointSuffix = '') => {
   const callApi = (
     serverRoute,

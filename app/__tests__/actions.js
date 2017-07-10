@@ -1,7 +1,7 @@
 import * as ActionCreators from '../app/actions';
 
 describe('Action creators for SpotifySymbol', () => {
-  it('getMovieRecommendation', () => {
+  it('getMoviesRecommendation', () => {
     const expectedAction = {
       type: 'GET_MOVIE_RECOMMENDATION',
       [ActionCreators.SpotifySymbol]: {
@@ -92,16 +92,6 @@ describe('Action creators for SpotifySymbol', () => {
 });
 
 describe('Action creators for TMDB', () => {
-  it('getMoviesDiscover', () => {
-    const expectedAction = {
-      type: 'GET_MOVIES_DISCOVER',
-      [ActionCreators.TMDBSymbol]: {
-        endpoint: '/discover/movie',
-        method: 'GET',
-      },
-    };
-    expect(ActionCreators.getMoviesDiscover()).toEqual(expectedAction);
-  });
   it('getMovieFromId', () => {
     const movieId = '11';
     const list = false;

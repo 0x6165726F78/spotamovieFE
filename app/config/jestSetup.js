@@ -1,5 +1,5 @@
 /*global jest*/
-import 'isomorphic-fetch'
+import 'isomorphic-fetch';
 jest.mock('Linking', () => {
   return {
     addEventListener: jest.fn(),
@@ -7,7 +7,7 @@ jest.mock('Linking', () => {
     openURL: jest.fn(),
     canOpenURL: jest.fn(),
     getInitialURL: jest.fn(),
-  }
-})
+  };
+});
 
-global.fetch = require('jest-fetch-mock')
+global.fetch = require('jest-fetch-mock');
